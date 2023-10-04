@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <Reference Include="Seal">
-        <HintPath>..\Seal\obj\Debug\net7.0\Seal.dll</HintPath>
+        <HintPath>\obj\Debug\net7.0\Seal.dll</HintPath>
       </Reference>
     </ItemGroup>
 
