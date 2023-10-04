@@ -45,25 +45,30 @@ public class Sketch
         ConsoleColor.Blue,
         ConsoleColor.Blue,
         ConsoleColor.Blue,
-        ConsoleColor.DarkCyan,
-        ConsoleColor.DarkCyan,
-        ConsoleColor.DarkCyan,
-        ConsoleColor.DarkCyan,
         ConsoleColor.Cyan,
         ConsoleColor.Cyan,
         ConsoleColor.Cyan,
         ConsoleColor.Cyan,
         ConsoleColor.Cyan,
-        ConsoleColor.DarkCyan,
-        ConsoleColor.DarkCyan,
-        ConsoleColor.DarkCyan,
-        ConsoleColor.DarkCyan
+        ConsoleColor.Cyan,
+        ConsoleColor.Cyan,
+        ConsoleColor.White,
+        ConsoleColor.White,
+        ConsoleColor.White,
+        ConsoleColor.White,
+        ConsoleColor.White,
+        ConsoleColor.White,
+        ConsoleColor.White
     };
 
-    public static void BoardApprarence(int menuWidth, int countContent)
+    public static void TitledBoardApprarence(int menuWidth, int countContent)
     {
         Rect(0, 0, menuWidth, 2, '─', '│', "┌┐├┤");
         Rect(0, 2, menuWidth, countContent + 1, '─', '│', "├┤└┘");
+    }
+    public static void BoardApprarence(int menuWidth, int countContent)
+    {
+        Rect(0, 0, menuWidth, countContent + 1, '─', '│', "┌┐└┘");
     }
     public static void MenuAppearence(int x, int y, int menuWidth, int numOfOptions, int appearance)
     {

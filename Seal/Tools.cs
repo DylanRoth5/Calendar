@@ -36,7 +36,7 @@ public static class Tools
     {
         string[] options = { "Use current time", "Write down the time" };
         string message = "DateTime Select";
-        var selection = Menu(message, options);
+        var selection = Select(message, options);
         DateTime currentTime = default;
         switch (selection)
         {
@@ -46,11 +46,10 @@ public static class Tools
             case 2:
                 currentTime = ReadDate("Enter the date and time");
                 break;
-            case 0:
-                break;
         }
         return currentTime;
     }
+    
 
     public static void EraseLine(int index, string filepath)
     {
@@ -115,7 +114,6 @@ public static class Tools
         {
             Console.WriteLine(message);
             var input = Console.ReadLine();
-
             if (DateTime.TryParseExact(input, "dd/MM/yyyy HH:mm:ss", null, DateTimeStyles.None, out result))
                 isValid = true;
             else
@@ -340,11 +338,8 @@ public static class Tools
 
     public static void Board(List<string> content)
     {
-        var menuWidth = 0;
-        foreach (var item in content.Where(item => item.Length >= menuWidth)) menuWidth = item.Length;
-        if (menuWidth % 2 != 0) menuWidth++;
-        menuWidth += 10;
-        Rect(0, 0, menuWidth, content.Count + 1, '─', '│', "┌┐└┘");
+        var menuWidth = CalculateMenuWidth(content, 10);
+        BoardApprarence(menuWidth,content.Count);
         var y = 1;
         foreach (var item in content)
         {
@@ -353,19 +348,29 @@ public static class Tools
         }
     }
 
-    public static void Board(string title, List<string>? content)
+    public static int CalculateMenuWidth(List<string> content, int padding) => CalculateMenuWidth(content.ToArray(), padding);
+
+    public static int CalculateMenuWidth(string[] content, int padding)
+    {
+        var menuWidth = 0;
+        foreach (var t in content)
+            if (t.Length >= menuWidth)
+                menuWidth = t.Length;
+        if (menuWidth % 2 != 0)
+            menuWidth++;
+        menuWidth += padding;
+        return menuWidth;
+    }
+
+    public static void TitledBoard(string title, List<string>? content)
     {
         Clear();
         Console.CursorVisible = false;
-        var menuWidth = 0;
+        
         if (content != null)
         {
-            foreach (var t in content.Where(t => t.Length >= menuWidth))
-                menuWidth = t.Length;
-            if (menuWidth % 2 != 0)
-                menuWidth++;
-            menuWidth += 10;
-            BoardApprarence(menuWidth,content.Count);
+            var menuWidth = CalculateMenuWidth(content,10);    
+            TitledBoardApprarence(menuWidth,content.Count);
             var x = menuWidth / 2 - title.Length / 2;
             var y = 1;
             Spot(x, y);
@@ -375,7 +380,6 @@ public static class Tools
                 x++;
                 SpotX(x);
             }
-
             y++;
             Spot(x, y);
             foreach (var t in content)
@@ -391,78 +395,49 @@ public static class Tools
                 }
             }
         }
-
         Catch();
     }
 
     public static int Menu(string title, string[] options)
     {
-        Clear();
         options = options.Append("Exit").ToArray();
+        var result = Select(title, options);
+        return result == options.Length ? 0 : result;
+    }
+
+    public static int Select(string title, string[] options)
+    {
+        Clear();
         var background = ConsoleColor.Black;
         var foreground = ConsoleColor.White;
         Console.CursorVisible = false;
         var running = true;
-        var menuWidth = 0;
         var result = 1;
         var color = 0;
         var appearance = 0;
         var word = "(a) Appearance";
         Flip(background, foreground);
-        foreach (var t in options)
-            if (t.Length >= menuWidth)
-                menuWidth = t.Length;
-        if (menuWidth % 2 != 0)
-            menuWidth++;
-        menuWidth += 20;
+        var menuWidth = CalculateMenuWidth(options, 20);
+        Spot(0, 0);
         while (running)
         {
             foreground = SealPulse[color];
-            var x = 0;
-            var y = 0;
-            
-            MenuAppearence(x,y,menuWidth,options.Length,appearance);
+            MenuAppearence(0,0,menuWidth,options.Length,appearance);
             SketchSeal(menuWidth+2,0);
-
-            SayAt(menuWidth / 2 - word.Length / 2, y + 4 + options.Length, word); // printing menu's help
-            x = menuWidth / 2 - title.Length / 2;
-            y++;
-            Spot(x, y);
-            foreach (var t in title)
-            {
-                Say("" + t);
-                x++;
-                SpotX(x);
-            }
-
-            y++;
-            Spot(x, y);
+            SayAt(menuWidth / 2 - word.Length / 2, 4 + options.Length, word); 
+            SayAt(menuWidth / 2 - title.Length / 2,1,title);
+            Spot(0, 2);
             for (var i = 0; i < options.Length; i++)
             {
-                y++;
-                x = menuWidth / 2 - options[i].Length / 2;
-                Spot(x, y);
+                Spot(menuWidth / 2 - options[i].Length / 2, GetY()+1);
                 if (result == i + 1)
                 {
                     Flip(foreground, background);
-                    for (var j = 0; j < options[i].Length; j++)
-                    {
-                        Say("" + options[i][j]);
-                        x++;
-                        SpotX(x);
-                    }
-
+                    Say(options[i]);
                     Flip(background, foreground);
                 }
                 else
-                {
-                    for (var j = 0; j < options[i].Length; j++)
-                    {
-                        Say("" + options[i][j]);
-                        x++;
-                        SpotX(x);
-                    }
-                }
+                    Say(options[i]);
             }
 
             Spot(0, 0);
@@ -479,122 +454,15 @@ public static class Tools
                 Thread.Sleep(100);
                 color++;
             }
-
-            // security check
             if (result < 1) result = options.Length;
             if (result > options.Length) result = 1;
             if (color >= SealPulse.Length) color = 0;
             if (appearance >= 3) appearance = 0;
         }
-
-        if (result == options.Length) result = 0; // if you selected the last one throw a 0
-
-        Flip(ConsoleColor.Black, ConsoleColor.White); // reset console colors
-        Clear();
-        return result;
-    }
-
-    public static int Menu(string title, List<string> options)
-    {
-        Clear();
-        // settings for the menu
-        options.Add("Exit");
-        var numOfOptions = options.Count;
-        var background = ConsoleColor.Black;
-        var foreground = ConsoleColor.White;
-        Console.CursorVisible = false;
-        var running = true;
-        var menuWidth = 0;
-        var result = 1;
-        var color = 0;
-        var appearance = 0;
-        const string word = "(a) Appearance";
-        Flip(background, foreground);
-        for (var i = 0; i < numOfOptions; i++)
-            if (options[i].Length >= menuWidth)
-                menuWidth = options[i].Length;
-        if (menuWidth % 2 != 0)
-            menuWidth++;
-        menuWidth += 20;
-        while (running)
-        {
-            foreground = SealPulse[color];
-            var x = 0;
-            MenuAppearence(x,0,menuWidth,numOfOptions,appearance);
-            SayAt(menuWidth / 2 - word.Length / 2, 4 + numOfOptions, word); // printing menu's help
-            x = menuWidth / 2 - title.Length / 2;
-            var y = 1;
-            Spot(x, y);
-            foreach (var t in title)
-            {
-                Say("" + t);
-                x++;
-                SpotX(x);
-            }
-            y++;
-            Spot(x, y);
-            for (var i = 0; i < numOfOptions; i++)
-            {
-                y++;
-                x = menuWidth / 2 - options[i].Length / 2;
-                Spot(x, y);
-                if (result == i + 1)
-                {
-                    // if option is selected it must be noticeable
-                    Flip(foreground, background);
-                    for (var j = 0; j < options[i].Length; j++)
-                    {
-                        Say("" + options[i][j]);
-                        x++;
-                        SpotX(x);
-                    }
-
-                    Flip(background, foreground);
-                }
-                else
-                {
-                    for (var j = 0; j < options[i].Length; j++)
-                    {
-                        Say("" + options[i][j]);
-                        x++;
-                        SpotX(x);
-                    }
-                }
-            }
-
-            Spot(0, 0);
-            if (Console.KeyAvailable)
-            {
-                var k = Catch();
-                switch (k.Key)
-                {
-                    case ConsoleKey.DownArrow:
-                        result++;
-                        break;
-                    case ConsoleKey.UpArrow:
-                        result--;
-                        break;
-                    case ConsoleKey.Enter:
-                        running = false;
-                        break;
-                    case ConsoleKey.A:
-                        appearance++;
-                        break;
-                }
-            }
-            else
-            {
-                Thread.Sleep(100);
-                color++;
-            }
-            if (result < 1) result = options.Count;
-            if (result > options.Count) result = 1;
-            if (color >= SealPulse.Length) color = 0;
-            if (appearance >= 3) appearance = 0;
-        }
-        if (result == options.Count) result = 0;
         Flip(ConsoleColor.Black, ConsoleColor.White);
         Clear();
         return result;
     }
+
+    public static int Menu(string title, List<string> options) => Menu(title, options.ToArray());
 }
