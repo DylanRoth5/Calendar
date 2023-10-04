@@ -1,6 +1,6 @@
 ﻿using Calendar.Controllers;
 using Calendar.Entities;
-using Seal;
+using Calendar.Seal;
 
 namespace Calendar;
 
@@ -13,9 +13,9 @@ internal static class Program
     {
         Events = new List<Event>();
         Contacts = new List<Contact>();
-        Load();
+        // Load();
         Menu();
-        Save();
+        // Save();
     }
 
     private static void Menu()
@@ -59,14 +59,14 @@ internal static class Program
 
     private static void Load()
     {
-        var eventData = File.ReadAllLines(@"Data\\Thing.txt");
+        var eventData = File.ReadAllLines(@"Data\\Events.txt");
         foreach (var info in eventData)
         {
             var data = info.Split('|');
             IEvent.Add(data[1]);
         }
 
-        var contactData = File.ReadAllLines(@"Data\\Thing.txt");
+        var contactData = File.ReadAllLines(@"Data\\Contacts.txt");
         foreach (var info in contactData)
         {
             var data = info.Split('|');
