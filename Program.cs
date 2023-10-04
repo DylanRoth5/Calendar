@@ -5,42 +5,12 @@ namespace Calendar;
 
 internal static class Program
 {
-    // TP 3 - Agenda
-    // Se necesita una aplicación para administrar una agenda personal, se deberá poder registrar diferentes eventos y contactos.
-    //     Para los contactos se necesita guardar los datos de nombre, apellido, teléfono y email.
-    //     Cada Evento tendrá, título, fecha y hora, cantidad de horas, contactos que participan del evento (puede no tener datos) y el lugar del evento.
-    //     Permitir la administración de todos los datos, informes de eventos, eventos en que participa algún contacto, etc.
-    //     En la carga de un evento se debe controlar que no se superpongas los eventos.
-    //     Generar una vista por día donde se muestren todas las horas del día y si hay algún evento que este ocupando esa hora.
-    //     Generar una vista por mes que muestra los eventos de cada día, tipo calendario.
-    //
-    // •	ABM eventos y contactos.
-    // •	Contactos necesita:
-    // o	Nombre.
-    //     o	Apellido.
-    //     o	Teléfono.
-    //     o	Email.
-    // •	Evento necesita:
-    // o	Titulo.
-    //     o	Fecha y hora. 
-    //     o	Cantidad de horas.
-    //     o	Contactos que participan (pueden no tener datos).
-    // o	Lugar.
-    // •	Controlar superposición de eventos.
-    // •	Vistas:
-    // o	Por día, con cada hora y evento que hay (si hay).
-    // o	Por mes, con los eventos del día.
-    // •	Relaciones:
-    // o	A un evento puede asistir varias personas, pero una persona puede asistir a un solo evento por día.
-    //     o	Un día puede tener varios eventos, pero no pueden ocurrir en el mismo horario. (Posible entidad día?).
-    // •	Roles: 
-    // o	Ya que le sale bien el menú gamer, Dylan puede hacer las vistas (sugerencia).
-    // o	Aylem, Teo, Enzo: por asignar.
-
-    public static List<Thing>? Things;
+    public static List<Event>? Events;
+    public static List<Contact>? Contacts;
     private static void Main()
     {
-        Things = new List<Thing>();
+        Events = new List<Event>();
+        Contacts = new List<Contact>();
         Load();
         Menu();
         Save();
@@ -49,12 +19,21 @@ internal static class Program
     {
         while (true)
         {
-            string[] options = { "Thing" };
-            var result = Seal.Menu("Calendar Menu", options);
+            string[] options = { "Event", "Contact", "Monthly view", "Daily view"  };
+            var result = Seal.Menu("Calendar", options);
             switch (result)
             {
                 case 1:
-                    NThing.Menu();
+                    IEvent.Menu();
+                    continue;
+                case 2:
+                    IContact.Menu();
+                    continue;
+                case 3:
+                    ICalendar.MontlyView();
+                    continue;
+                case 4:
+                    ICalendar.DailyView();
                     continue;
                 case 0:
                     break;
@@ -64,18 +43,28 @@ internal static class Program
     }
     private static void Save()
     {
-        File.WriteAllText(@"Data\\Thing.txt", "");
-        if (Things != null)
-            foreach (var item in Things)
-                Seal.FileWrite(item.ToString(), @"Data\\Thing.txt");
+        File.WriteAllText(@"Data\\Events.txt", "");
+        if (Events == null) return;
+        foreach (var item in Events)
+            Seal.FileWrite(item.ToString(), @"Data\\Events.txt");
+        File.WriteAllText(@"Data\\Contacts.txt", "");
+        if (Contacts == null) return;
+        foreach (var item in Contacts)
+            Seal.FileWrite(item.ToString(), @"Data\\Contacts.txt");
     }
     private static void Load()
     {
-        var ThingData = File.ReadAllLines(@"Data\\Thing.txt");
-        foreach (var info in ThingData)
+        var eventData = File.ReadAllLines(@"Data\\Thing.txt");
+        foreach (var info in eventData)
         {
-            string?[] data = info.Split('|');
-            NThing.Add(data[1]);
+            var data = info.Split('|');
+            IEvent.Add(data[1]);
+        }
+        var contactData = File.ReadAllLines(@"Data\\Thing.txt");
+        foreach (var info in contactData)
+        {
+            var data = info.Split('|');
+            IContact.Add(data[1]);
         }
     }
 }
