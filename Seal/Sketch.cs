@@ -4,6 +4,38 @@ namespace Calendar.Seal;
 
 public class Sketch
 {
+    public static readonly string[] SealSketch = {
+"    ████████",
+"  ██░░░░░░░░██",
+"██░░    ░░  ░░██",
+"██  ████░░██  ██",
+"██  ████░░██  ██",
+"██▒▒░░░░▓▓▓▓░░██",
+"██▒▒▒▒░░░░░░▒▒▒▒██",
+"██▒▒▒▒░░▒▒▒▒▒▒▒▒░░██    ████",
+"  ██░░░░▒▒░░▒▒▒▒░░▒▒██████▒▒████",
+"    ██▒▒░░▒▒░░▒▒░░▒▒░░▒▒▒▒▒▒██▒▒██",
+"    ████░░██▒▒▒▒▒▒░░██░░▒▒▒▒░░██",
+"  ██▒▒▒▒▒▒██▒▒░░░░░░██░░▒▒░░██",
+"  ██████████░░░░░░░░████████",
+"          ██░░░░░░░░██",
+"            ████████" };
+
+    public static void SketchSeal()
+    {
+        foreach (var line in SealSketch)
+        {
+            SayLine(line);
+        }
+    }
+    public static void SketchSeal(int x, int y)
+    {
+        foreach (var line in SealSketch)
+        {
+            SayAt(x,y,line);
+            y++;
+        }
+    }
     public static readonly ConsoleColor[] SealPulse =
     {
         ConsoleColor.Blue,

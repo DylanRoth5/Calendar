@@ -422,6 +422,7 @@ public static class Tools
             var y = 0;
             
             MenuAppearence(x,y,menuWidth,options.Length,appearance);
+            SketchSeal(menuWidth+2,0);
 
             SayAt(menuWidth / 2 - word.Length / 2, y + 4 + options.Length, word); // printing menu's help
             x = menuWidth / 2 - title.Length / 2;
