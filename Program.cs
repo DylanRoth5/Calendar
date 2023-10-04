@@ -7,6 +7,7 @@ internal static class Program
 {
     public static List<Event>? Events;
     public static List<Contact>? Contacts;
+
     private static void Main()
     {
         Events = new List<Event>();
@@ -15,11 +16,12 @@ internal static class Program
         Menu();
         Save();
     }
+
     private static void Menu()
     {
         while (true)
         {
-            string[] options = { "Event", "Contact", "Monthly view", "Daily view"  };
+            string[] options = { "Event", "Contact", "Monthly view", "Daily view" };
             var result = Seal.Menu("Calendar", options);
             switch (result)
             {
@@ -30,7 +32,7 @@ internal static class Program
                     IContact.Menu();
                     continue;
                 case 3:
-                    ICalendar.MontlyView();
+                    ICalendar.Monthly_View();
                     continue;
                 case 4:
                     ICalendar.DailyView();
@@ -38,9 +40,11 @@ internal static class Program
                 case 0:
                     break;
             }
+
             break;
         }
     }
+
     private static void Save()
     {
         File.WriteAllText(@"Data\\Events.txt", "");
@@ -52,6 +56,7 @@ internal static class Program
         foreach (var item in Contacts)
             Seal.FileWrite(item.ToString(), @"Data\\Contacts.txt");
     }
+
     private static void Load()
     {
         var eventData = File.ReadAllLines(@"Data\\Thing.txt");
@@ -60,6 +65,7 @@ internal static class Program
             var data = info.Split('|');
             IEvent.Add(data[1]);
         }
+
         var contactData = File.ReadAllLines(@"Data\\Thing.txt");
         foreach (var info in contactData)
         {

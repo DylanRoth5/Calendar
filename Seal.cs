@@ -27,6 +27,7 @@ public static class Seal
         ConsoleColor.DarkCyan,
         ConsoleColor.DarkCyan
     };
+
     public static string? FileReadAll(string filepath)
     {
         if (!File.Exists(filepath)) return null;
@@ -36,25 +37,41 @@ public static class Seal
 
     public static DateTime ChooseDate(string? message)
     {
-        string[] options = { "Use current time", "Write down the time"};
-        if (message != null)
+        string[] options = { "Use current time", "Write down the time" };
+        message ??= "DateTime Select";
+        var selection = Menu(message, options);
+        DateTime currentTime = default;
+        switch (selection)
         {
-            var selection = Seal.Menu(message, options);
-            DateTime currentTime = default;
-            switch (selection)
-            {
-                case 1:
-                    currentTime = DateTime.Now;
-                    break;
-                case 2:
-                    currentTime = Seal.ReadDate("Enter the date and time");
-                    break;
-                case 0:
-                    break;
-            }
-            return currentTime;
+            case 1:
+                currentTime = DateTime.Now;
+                break;
+            case 2:
+                currentTime = ReadDate("Enter the date and time");
+                break;
+            case 0:
+                break;
         }
-        return default;
+        return currentTime;
+    }
+    public static DateTime ChooseDate()
+    {
+        string[] options = { "Use current time", "Write down the time" };
+        string message = "DateTime Select";
+        var selection = Menu(message, options);
+        DateTime currentTime = default;
+        switch (selection)
+        {
+            case 1:
+                currentTime = DateTime.Now;
+                break;
+            case 2:
+                currentTime = ReadDate("Enter the date and time");
+                break;
+            case 0:
+                break;
+        }
+        return currentTime;
     }
 
     public static void EraseLine(int index, string filepath)
@@ -95,7 +112,7 @@ public static class Seal
     public static bool Confirm(string message)
     {
         string[] options = { "Do it" };
-        return Menu(message, options)==1;
+        return Menu(message, options) == 1;
     }
 
     public static bool RecordMatches(int id, string[]? record, int position)
@@ -106,17 +123,10 @@ public static class Seal
     public static void FileWrite(string content, string filepath)
     {
         var info = FileReadAll(filepath);
-        if (info != null && !info.Contains($"{content}"))
-        {
-            var writer = new StreamWriter(filepath, true);
-            writer.WriteLine($"{content}");
-            SayLine($"{content} Saved successfully!!");
-            writer.Close();
-        }
-        else
-        {
-            SayLine($"{content} already exists!!");
-        }
+        if (info == null || info.Contains($"{content}")) return;
+        var writer = new StreamWriter(filepath, true);
+        writer.WriteLine($"{content}");
+        writer.Close();
     }
 
     public static DateTime ReadDate(string message)
@@ -148,6 +158,7 @@ public static class Seal
                 var ascii = Convert.ToInt32(consoleKeyInfo.KeyChar);
                 if (ascii is >= 97 and <= 122 or >= 65 and <= 90) letter = consoleKeyInfo.KeyChar;
             } while (letter == ' ');
+
             if (letter != ' ') return char.ToLower(letter);
         }
     }
@@ -176,85 +187,65 @@ public static class Seal
 
     public static void Print(string @filepath, List<string>? options)
     {
-        string content="";
+        var content = "";
         var menuWidth = 0;
         if (options != null)
         {
             foreach (var item in options.Where(item => item.Length >= menuWidth)) menuWidth = item.Length;
             if (menuWidth % 2 != 0) menuWidth++;
             menuWidth += 10;
-            string space = " ";
+            var space = " ";
             content += '\u250c';
-            for (int i = 0; i < menuWidth; i++)
-            {
-                content += '\u2500';
-            }
+            for (var i = 0; i < menuWidth; i++) content += '\u2500';
 
             content += '\u2510';
             content += "\n";
             foreach (var item in options)
             {
                 content += '│';
-                int itemLenght = item.Length;
+                var itemLenght = item.Length;
                 if (itemLenght % 2 != 0) itemLenght++;
-                for (int i = 0; i < (menuWidth / 2 - itemLenght / 2); i++)
-                {
-                    content += space;
-                }
+                for (var i = 0; i < menuWidth / 2 - itemLenght / 2; i++) content += space;
 
                 content += item;
-                for (int i = 0; i < (menuWidth / 2 - item.Length / 2); i++)
-                {
-                    content += space;
-                }
+                for (var i = 0; i < menuWidth / 2 - item.Length / 2; i++) content += space;
 
                 content += "│\n";
             }
+
             content += '\u2514';
-            for (int i = 0; i < menuWidth; i++)
-            {
-                content += '\u2500';
-            }
+            for (var i = 0; i < menuWidth; i++) content += '\u2500';
         }
+
         content += '\u2518';
         File.WriteAllText(filepath, content);
     }
+
     public static void Print(string @filepath, string[] options)
     {
-        string content="";
+        var content = "";
         var menuWidth = 0;
         foreach (var item in options.Where(item => item.Length >= menuWidth)) menuWidth = item.Length;
         if (menuWidth % 2 != 0) menuWidth++;
         menuWidth += 10;
-        string space=" ";
+        var space = " ";
         content += '\u250c';
-        for (int i = 0; i < menuWidth; i++)
-        {
-            content += '\u2500';
-        }
+        for (var i = 0; i < menuWidth; i++) content += '\u2500';
         content += '\u2510';
         content += "\n";
         foreach (var item in options)
         {
             content += '│';
-            int itemLenght = item.Length;
+            var itemLenght = item.Length;
             if (itemLenght % 2 != 0) itemLenght++;
-            for (int i = 0; i < (menuWidth / 2 - itemLenght / 2); i++)
-            {
-                content += space;
-            }
+            for (var i = 0; i < menuWidth / 2 - itemLenght / 2; i++) content += space;
             content += item;
-            for (int i = 0; i < (menuWidth / 2 - item.Length / 2); i++)
-            {
-                content += space;
-            }
+            for (var i = 0; i < menuWidth / 2 - item.Length / 2; i++) content += space;
             content += "│\n";
         }
+
         content += '\u2514';
-        for (int i = 0; i < menuWidth; i++)
-        {
-            content += '\u2500';
-        }
+        for (var i = 0; i < menuWidth; i++) content += '\u2500';
         content += '\u2518';
         File.WriteAllText(filepath, content);
     }
@@ -447,12 +438,12 @@ public static class Seal
                 menuWidth = t.Length;
         if (menuWidth % 2 != 0)
             menuWidth++;
-        menuWidth += 20; 
+        menuWidth += 20;
         while (running)
         {
-            foreground = SealPulse[color]; 
-            var x = 0; 
-            var y = 0; 
+            foreground = SealPulse[color];
+            var x = 0;
+            var y = 0;
             if (appearance == 1)
             {
                 Rect(x, y, menuWidth, 2, '═', '║', "╔╗╠╣");
@@ -516,7 +507,7 @@ public static class Seal
             Spot(0, 0);
             if (Console.KeyAvailable)
             {
-                var k = Catch(); 
+                var k = Catch();
                 if (k.Key == ConsoleKey.DownArrow) result++;
                 if (k.Key == ConsoleKey.UpArrow) result--;
                 if (k.Key == ConsoleKey.Enter) running = false;
@@ -524,7 +515,7 @@ public static class Seal
             }
             else
             {
-                Thread.Sleep(100); 
+                Thread.Sleep(100);
                 color++;
             }
 
@@ -563,11 +554,11 @@ public static class Seal
                 menuWidth = options[i].Length;
         if (menuWidth % 2 != 0)
             menuWidth++;
-        menuWidth += 20; 
+        menuWidth += 20;
         while (running)
         {
-            foreground = SealPulse[color];  
-            var x = 0; 
+            foreground = SealPulse[color];
+            var x = 0;
             var y = 0;
             if (appearance == 1)
             {
@@ -597,7 +588,8 @@ public static class Seal
                 Say("" + t);
                 x++;
                 SpotX(x);
-            } 
+            }
+
             y++;
             Spot(x, y);
             for (var i = 0; i < numOfOptions; i++)
@@ -632,7 +624,7 @@ public static class Seal
             Spot(0, 0);
             if (Console.KeyAvailable)
             {
-                var k = Catch(); 
+                var k = Catch();
                 switch (k.Key)
                 {
                     case ConsoleKey.DownArrow:
@@ -651,15 +643,17 @@ public static class Seal
             }
             else
             {
-                Thread.Sleep(100); 
+                Thread.Sleep(100);
                 color++;
             }
+
             if (result < 1) result = options.Count;
             if (result > options.Count) result = 1;
             if (color >= SealPulse.Length) color = 0;
             if (appearance >= 3) appearance = 0;
         }
-        if (result == options.Count) result = 0; 
+
+        if (result == options.Count) result = 0;
         Flip(ConsoleColor.Black, ConsoleColor.White);
         Clear();
         return result;

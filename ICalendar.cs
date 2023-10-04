@@ -2,7 +2,7 @@ namespace Calendar;
 
 public interface ICalendar
 {
-    static void MontlyView()
+    static void Monthly_View()
     {
         throw new NotImplementedException();
     }
