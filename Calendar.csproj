@@ -7,4 +7,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Reference Include="Seal">
+        <HintPath>..\Seal\obj\Debug\net7.0\Seal.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

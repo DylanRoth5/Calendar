@@ -1,5 +1,6 @@
 ﻿using Calendar.Controllers;
 using Calendar.Entities;
+using Seal;
 
 namespace Calendar;
 
@@ -22,7 +23,7 @@ internal static class Program
         while (true)
         {
             string[] options = { "Event", "Contact", "Monthly view", "Daily view" };
-            var result = Seal.Menu("Calendar", options);
+            var result = Tools.Menu("Calendar", options);
             switch (result)
             {
                 case 1:
@@ -40,7 +41,6 @@ internal static class Program
                 case 0:
                     break;
             }
-
             break;
         }
     }
@@ -50,11 +50,11 @@ internal static class Program
         File.WriteAllText(@"Data\\Events.txt", "");
         if (Events == null) return;
         foreach (var item in Events)
-            Seal.FileWrite(item.ToString(), @"Data\\Events.txt");
+            Tools.FileWrite(item.ToString(), @"Data\\Events.txt");
         File.WriteAllText(@"Data\\Contacts.txt", "");
         if (Contacts == null) return;
         foreach (var item in Contacts)
-            Seal.FileWrite(item.ToString(), @"Data\\Contacts.txt");
+            Tools.FileWrite(item.ToString(), @"Data\\Contacts.txt");
     }
 
     private static void Load()
