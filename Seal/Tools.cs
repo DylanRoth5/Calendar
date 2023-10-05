@@ -29,14 +29,14 @@ public static class Tools
             Spot(menuWidth / 2 - title.Length / 2, 1);
             Say(title);
             Spot(menuWidth / 2 - date.Length / 2, 3);
-            if (selected==1)
+            if (selected==5)
             {
                 Flip();
                 Say(Day.ToString());
                 Flip();
             }else Say(Day.ToString());
             Say("/");
-            if (selected==2)
+            if (selected==4)
             {
                 Flip();
                 Say(Month.ToString());
@@ -50,14 +50,14 @@ public static class Tools
                 Flip();
             }else Say(Year.ToString());
             Say(" ");
-            if (selected==4)
+            if (selected==2)
             {
                 Flip();
                 Say(hour.ToString());
                 Flip();
             }else Say(hour.ToString());
             Say(":");
-            if (selected==5)
+            if (selected==1)
             {
                 Flip();
                 Say(minute.ToString());
@@ -67,7 +67,7 @@ public static class Tools
             var k = Catch();
             switch (selected)
             {
-                case 1:
+                case 5:
                     switch (k.Key)
                     {
                         case ConsoleKey.DownArrow:
@@ -81,7 +81,7 @@ public static class Tools
                             break;
                     }
                     break;
-                case 2:
+                case 4:
                     switch (k.Key)
                     {
                         case ConsoleKey.DownArrow:
@@ -109,7 +109,7 @@ public static class Tools
                             break;
                     }
                     break;
-                case 4:
+                case 2:
                     switch (k.Key)
                     {
                         case ConsoleKey.DownArrow:
@@ -123,7 +123,7 @@ public static class Tools
                             break;
                     }
                     break;
-                case 5:
+                case 1:
                     switch (k.Key)
                     {
                         case ConsoleKey.DownArrow:
@@ -138,6 +138,15 @@ public static class Tools
                     }
                     break;
             }
+
+            if (minute > 59) minute = 1;
+            if (minute < 1) minute = 59;
+            if (hour > 24) hour = 1;
+            if (hour < 1) hour = 23;
+            if (Month > 12) Month = 1;
+            if (Month < 1) Month = 12;
+            if (Day > DateTime.DaysInMonth(Year, Month)) Day = 1;
+            if (Day < 1) Day = DateTime.DaysInMonth(Year, Month);
             if (k.Key == ConsoleKey.Enter && selected == 6) running = false;
         }
         Clear();
@@ -164,7 +173,7 @@ public static class Tools
             Spot(menuWidth / 2 - title.Length / 2, 1);
             Say(title);
             Spot(menuWidth / 2 - date.Length / 2, 3);
-            if (selected==1)
+            if (selected==3)
             {
                 Flip();
                 Say(Day.ToString());
@@ -178,7 +187,7 @@ public static class Tools
                 Flip();
             }else Say(Month.ToString());
             Say("/");
-            if (selected==3)
+            if (selected==1)
             {
                 Flip();
                 Say(Year.ToString());
@@ -188,7 +197,7 @@ public static class Tools
             var k = Catch();
             switch (selected)
             {
-                case 1:
+                case 3:
                     switch (k.Key)
                     {
                         case ConsoleKey.DownArrow:
@@ -216,7 +225,7 @@ public static class Tools
                             break;
                     }
                     break;
-                case 3:
+                case 1:
                     switch (k.Key)
                     {
                         case ConsoleKey.DownArrow:
