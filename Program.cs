@@ -8,12 +8,14 @@ internal static class Program
 {
     public static List<Event>? Events;
     public static List<Contact>? Contacts;
+    public static DateTime Date;
 
     private static void Main()
     {
         Events = new List<Event>();
         Contacts = new List<Contact>();
         // Load();
+        Date = Tools.ChooseDate();
         Menu();
         // Save();
     }
@@ -22,7 +24,7 @@ internal static class Program
     {
         while (true)
         {
-            string[] options = { "Event", "Contact", "Monthly view", "Daily view" };
+            string[] options = { "Events", "Contacts", "See Calendar" };
             var result = Tools.Menu("Calendar", options);
             switch (result)
             {
@@ -34,9 +36,6 @@ internal static class Program
                     continue;
                 case 3:
                     ICalendar.Monthly_View();
-                    continue;
-                case 4:
-                    ICalendar.DailyView();
                     continue;
                 case 0:
                     break;

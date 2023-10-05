@@ -1,11 +1,242 @@
 ﻿using System.Globalization;
+using System.Runtime.InteropServices.JavaScript;
 using static Calendar.Seal.Sketch;
 
 namespace Calendar.Seal;
 
 public static class Tools
 {
-
+    public static DateTime SetDateTime()
+    {
+        var Year = DateTime.Now.Year;
+        var Month = DateTime.Now.Month;
+        var Day = 10;
+        var hour = DateTime.Now.Hour;
+        var minute = DateTime.Now.Minute;
+        var second = 0;
+        var running = true;
+        var date = $"{Day}/{Month}/{Year} {hour}:{minute}";
+        var selected = 1;
+        while (running) 
+        {
+            var content = new List<string>() { date };
+            var title = "Choose Year";
+            Clear();
+            Console.CursorVisible = false;
+        
+            var menuWidth = CalculateMenuWidth(content,10);    
+            TitledBoardApprarence(menuWidth,content.Count);
+            Spot(menuWidth / 2 - title.Length / 2, 1);
+            Say(title);
+            Spot(menuWidth / 2 - date.Length / 2, 3);
+            if (selected==1)
+            {
+                Flip();
+                Say(Day.ToString());
+                Flip();
+            }else Say(Day.ToString());
+            Say("/");
+            if (selected==2)
+            {
+                Flip();
+                Say(Month.ToString());
+                Flip();
+            }else Say(Month.ToString());
+            Say("/");
+            if (selected==3)
+            {
+                Flip();
+                Say(Year.ToString());
+                Flip();
+            }else Say(Year.ToString());
+            Say(" ");
+            if (selected==4)
+            {
+                Flip();
+                Say(hour.ToString());
+                Flip();
+            }else Say(hour.ToString());
+            Say(":");
+            if (selected==5)
+            {
+                Flip();
+                Say(minute.ToString());
+                Flip();
+            }else Say(minute.ToString());
+            
+            var k = Catch();
+            switch (selected)
+            {
+                case 1:
+                    switch (k.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            Day--;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            Day++;
+                            break;
+                        case ConsoleKey.Enter:
+                            selected++;
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (k.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            Month--;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            Month++;
+                            break;
+                        case ConsoleKey.Enter:
+                            selected++;
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch (k.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            Year--;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            Year++;
+                            break;
+                        case ConsoleKey.Enter:
+                            selected++;
+                            break;
+                    }
+                    break;
+                case 4:
+                    switch (k.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            hour--;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            hour++;
+                            break;
+                        case ConsoleKey.Enter:
+                            selected++;
+                            break;
+                    }
+                    break;
+                case 5:
+                    switch (k.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            minute--;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            minute++;
+                            break;
+                        case ConsoleKey.Enter:
+                            selected++;
+                            break;
+                    }
+                    break;
+            }
+            if (k.Key == ConsoleKey.Enter && selected == 6) running = false;
+        }
+        Clear();
+        Spot(0,0);
+        return DateTime.Parse($"{Day}/{Month}/{Year} {hour}:{minute}:{second}");
+    }
+    public static DateTime SetDate()
+    {
+        var Year = DateTime.Now.Year;
+        var Month = DateTime.Now.Month;
+        var Day = 10;
+        var running = true;
+        var date = $"{Day}/{Month}/{Year}";
+        var selected = 1;
+        while (running) 
+        {
+            var content = new List<string>() { date };
+            var title = "Choose Year";
+            Clear();
+            Console.CursorVisible = false;
+        
+            var menuWidth = CalculateMenuWidth(content,10);    
+            TitledBoardApprarence(menuWidth,content.Count);
+            Spot(menuWidth / 2 - title.Length / 2, 1);
+            Say(title);
+            Spot(menuWidth / 2 - date.Length / 2, 3);
+            if (selected==1)
+            {
+                Flip();
+                Say(Day.ToString());
+                Flip();
+            }else Say(Day.ToString());
+            Say("/");
+            if (selected==2)
+            {
+                Flip();
+                Say(Month.ToString());
+                Flip();
+            }else Say(Month.ToString());
+            Say("/");
+            if (selected==3)
+            {
+                Flip();
+                Say(Year.ToString());
+                Flip();
+            }else Say(Year.ToString());
+            
+            var k = Catch();
+            switch (selected)
+            {
+                case 1:
+                    switch (k.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            Day--;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            Day++;
+                            break;
+                        case ConsoleKey.Enter:
+                            selected++;
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (k.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            Month--;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            Month++;
+                            break;
+                        case ConsoleKey.Enter:
+                            selected++;
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch (k.Key)
+                    {
+                        case ConsoleKey.DownArrow:
+                            Year--;
+                            break;
+                        case ConsoleKey.UpArrow:
+                            Year++;
+                            break;
+                        case ConsoleKey.Enter:
+                            selected++;
+                            break;
+                    }
+                    break;
+            }
+            if (k.Key == ConsoleKey.Enter && selected == 4) running = false;
+        }
+        Clear();
+        Spot(0,0);
+        return DateTime.Parse($"{Day}/{Month}/{Year} {DateTime.Now:HH:mm:ss}");
+    }
     public static string? FileReadAll(string filepath)
     {
         if (!File.Exists(filepath)) return null;
@@ -44,7 +275,7 @@ public static class Tools
                 currentTime = DateTime.Now;
                 break;
             case 2:
-                currentTime = ReadDate("Enter the date and time");
+                currentTime = SetDateTime();
                 break;
         }
         return currentTime;
@@ -329,6 +560,7 @@ public static class Tools
         Catch();
         Clear();
     }
+    public static void Flip() => (Console.BackgroundColor, Console.ForegroundColor) = (Console.ForegroundColor, Console.BackgroundColor);
 
     public static void Flip(ConsoleColor background, ConsoleColor foreground)
     {
