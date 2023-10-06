@@ -139,8 +139,8 @@ public static class Tools
                     break;
             }
 
-            if (minute > 59) minute = 1;
-            if (minute < 1) minute = 59;
+            if (minute > 59) minute = 0;
+            if (minute < 0) minute = 59;
             if (hour > 24) hour = 1;
             if (hour < 1) hour = 23;
             if (Month > 12) Month = 1;
