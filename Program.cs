@@ -50,14 +50,23 @@ internal static class Program
             {
                 conn.Open();
                 // cmd.CommandText =
-                //     "INSERT INTO Events (Title,Date,Hours,Place,ContactsId) VALUES('MeetUp','2023-10-10 12:52:00',2,'Plaza Sesamo',1)";
+                //     "INSERT INTO Events (Title,Date,Hours,Place) VALUES('Coffe','2023-10-10 12:52:00',2,'Guelcom')";
                 // cmd.ExecuteNonQuery();
-                cmd.CommandText = "select e.Title,e.Date,e.Hours,e.Place,c.Name,c.LastName,c.Phone,c.Email from Events as e JOIN Contacts as c on e.ContactsId = c.Id";
+                cmd.CommandText = "select e.*,c.* from Events as e INNER JOIN main.Contacts C on C.Id = e.ContactsId";
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Tools.SayLine($"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}] \n    [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]");
+                        if (!reader["ContactsId"].Equals(null))
+                        {
+                            Tools.SayLine(
+                                $"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}] \n    [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]");
+                        }
+                        else
+                        {
+                            Tools.SayLine(
+                                $"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]");
+                        }
                     }
                     conn.Close();
                 }
