@@ -50,21 +50,14 @@ internal static class Program
             {
                 conn.Open();
                 // cmd.CommandText =
-                //     "ALTER TABLE Contacts RENAME COLUMN Telefono TO Phone";
+                //     "INSERT INTO Events (Title,Date,Hours,Place,ContactsId) VALUES('MeetUp','2023-10-10 12:52:00',2,'Plaza Sesamo',1)";
                 // cmd.ExecuteNonQuery();
-                // // cmd.CommandText = createQuery;
-                // cmd.CommandText =
-                //     "INSERT INTO Contacts(Name,LastName,Phone,Email) VALUES('Alex','Malone','3434808642','alexmalone@gmail.com')";
-                // cmd.ExecuteNonQuery();
-                // cmd.CommandText =
-                //     "INSERT INTO Contacts(Name,LastName,Phone,Email) VALUES('Paula','Rios','3434808643','paularios@gmail.com')";
-                // cmd.ExecuteNonQuery();
-                cmd.CommandText = "select * from Contacts";
+                cmd.CommandText = "select e.Title,e.Date,e.Hours,e.Place,c.Name,c.LastName,c.Phone,c.Email from Events as e JOIN Contacts as c on e.ContactsId = c.Id";
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Tools.SayLine($"[{reader["Name"]}] [{reader["LastName"]}] [{reader["Phone"]}] [{reader["Email"]}]");
+                        Tools.SayLine($"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}] \n    [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]");
                     }
                     conn.Close();
                 }
