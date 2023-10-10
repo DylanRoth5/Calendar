@@ -24,52 +24,51 @@ internal static class Program
 
     private static void DataBase()
     {
-    //     string createQuery = @"
-    //     CREATE TABLE IF NOT EXISTS [Contacts] (
-	   //  [Id]	    INTEGER NOT NULL UNIQUE,
-	   //  [Name]	    CHAR(100) NOT NULL,
-	   //  [LastName]	CHAR(100),
-	   //  [Phone]	    INTEGER,
-	   //  [Email]	    CHAR(100),
-	   //  PRIMARY KEY([Id] AUTOINCREMENT))
-    // ";
- //    IF OBJECT_ID(N'Events', N'U') IS NULL
- //    CREATE TABLE [Events] (
-	// [Id]	INTEGER NOT NULL UNIQUE,
-	// [Title]	VARCHAR(100) NOT NULL,
-	// [Date]	DATETIME NOT NULL,
-	// [Hours]	INTEGER,
-	// [Place]	VARCHAR(150),
-	// [ContactsId]	INTEGER,
-	// PRIMARY KEY([Id] AUTOINCREMENT),
-	// FOREIGN KEY([ContactsId]) REFERENCES [Contacts]([Id]));
-        // SQLiteConnection.CreateFile("Calendar.db3");
         using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=C:\Users\dylan\BlackBox\Calendar\Calendar.db"))
         {
             using (SQLiteCommand cmd = new SQLiteCommand(conn))
             {
                 conn.Open();
-                // cmd.CommandText =
-                //     "INSERT INTO Events (Title,Date,Hours,Place) VALUES('Coffe','2023-10-10 12:52:00',2,'Guelcom')";
-                // cmd.ExecuteNonQuery();
-                cmd.CommandText = "select e.*,c.* from Events as e INNER JOIN main.Contacts C on C.Id = e.ContactsId";
+                Tools.SayLine("Contacts table:",ConsoleColor.Red);
+                cmd.CommandText = "select * from Contacts";
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                        Tools.SayLine(
+                            $"[{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",ConsoleColor.Green);
+                }
+                Tools.SayLine();
+                Tools.SayLine("Events table:",ConsoleColor.Red);
+                cmd.CommandText = "select * from Events";
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                        Tools.SayLine(
+                            $"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]",ConsoleColor.Green);
+                }
+                Tools.SayLine();
+                Tools.SayLine("Registers table:", ConsoleColor.Red);
+                cmd.CommandText = "select * from Events E join main.Registered R2 on E.EventId = R2.EventId join main.Contacts C on C.Contactd = R2.ContactId";
+                string? title = "";
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        if (!reader["ContactsId"].Equals(null))
+                        if (title.Equals(reader["Title"].ToString()))
                         {
-                            Tools.SayLine(
-                                $"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}] \n    [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]");
+                            Tools.SayLine($"   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",ConsoleColor.DarkGreen);
                         }
                         else
                         {
                             Tools.SayLine(
-                                $"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]");
+                                $"[{reader["title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]",ConsoleColor.Green);
+                            Tools.SayLine($"   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",ConsoleColor.DarkGreen);
                         }
+                        title = reader["Title"].ToString();
                     }
-                    conn.Close();
                 }
+                Tools.SayLine();
+                conn.Close();
             }
         }
         Console.ReadLine();

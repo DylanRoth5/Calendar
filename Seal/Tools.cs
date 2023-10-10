@@ -480,6 +480,20 @@ public static class Tools
     {
         Console.Write("" + word);
     }
+    public static void Say(string? word, ConsoleColor foreground)
+    {
+        var temp = Console.ForegroundColor; 
+        Console.ForegroundColor = foreground;
+        Say(word);
+        Console.ForegroundColor = temp;
+    }
+    public static void SayLine(string? word, ConsoleColor foreground)
+    {
+        var temp = Console.ForegroundColor; 
+        Console.ForegroundColor = foreground;
+        SayLine(word);
+        Console.ForegroundColor = temp;
+    }
 
     public static string? Read()
     {
@@ -570,7 +584,7 @@ public static class Tools
         Clear();
     }
     public static void Flip() => (Console.BackgroundColor, Console.ForegroundColor) = (Console.ForegroundColor, Console.BackgroundColor);
-
+    
     public static void Flip(ConsoleColor background, ConsoleColor foreground)
     {
         Console.BackgroundColor = background;
