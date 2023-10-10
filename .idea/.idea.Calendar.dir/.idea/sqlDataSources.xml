@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="7432fc81-15c9-40d1-b8f7-d1d295f37033" name="Calendar Mapping">
+      <data-sources db="bbd72fb1-d423-428a-af6f-8b4eb08737b3" ddl="3b736226-2105-4f0c-8545-8747d844c014" />
+    </mapping>
+  </component>
+</project>
