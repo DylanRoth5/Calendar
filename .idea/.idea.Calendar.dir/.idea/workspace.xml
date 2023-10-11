@@ -7,9 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c9764fe-929a-4250-9284-7522e9ee7e59" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ICalendar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ICalendar.cs" afterDir="false" />
+    <list default="true" id="6c9764fe-929a-4250-9284-7522e9ee7e59" name="Changes" comment="a">
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +129,7 @@
       <workItem from="1696959864097" duration="3867000" />
       <workItem from="1696976871145" duration="475000" />
       <workItem from="1696977890356" duration="13295000" />
-      <workItem from="1697029033805" duration="3421000" />
+      <workItem from="1697029033805" duration="4855000" />
     </task>
     <task id="LOCAL-00001" summary="Done views">
       <option name="closed" value="true" />
@@ -205,7 +203,31 @@
       <option name="project" value="LOCAL" />
       <updated>1696987213930</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Icalendar.ce Finished">
+      <option name="closed" value="true" />
+      <created>1697034615276</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1697034615276</updated>
+    </task>
+    <task id="LOCAL-00011" summary="gitignore">
+      <option name="closed" value="true" />
+      <created>1697034981247</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1697034981247</updated>
+    </task>
+    <task id="LOCAL-00012" summary="a">
+      <option name="closed" value="true" />
+      <created>1697035088391</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1697035088391</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,6 +269,9 @@
     <MESSAGE value="finished basic DataBase" />
     <MESSAGE value="DB finished" />
     <MESSAGE value="daily event view details" />
-    <option name="LAST_COMMIT_MESSAGE" value="daily event view details" />
+    <MESSAGE value="Icalendar.ce Finished" />
+    <MESSAGE value="gitignore" />
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
 </project>

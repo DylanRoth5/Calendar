@@ -16,10 +16,35 @@ internal static class Program
         Events = new List<Event>();
         Contacts = new List<Contact>();
         // Load();
-        ShowDataBase();
+        // ShowDataBase();
         Date = Tools.ChooseDate();
         Menu();
         // Save();
+    }
+    
+    private static void Menu()
+    {
+        while (true)
+        {
+            string[] options = { "Events", "Contacts", "See Calendar" };
+            var result = Tools.Menu("Calendar", options);
+            switch (result)
+            {
+                case 1:
+                    IEvent.Menu();
+                    continue;
+                case 2:
+                    IContact.Menu();
+                    continue;
+                case 3:
+                    ICalendar.Monthly_View();
+                    continue;
+                case 0:
+                    break;
+            }
+
+            break;
+        }
     }
 
     private static void ShowDataBase()
@@ -87,30 +112,6 @@ internal static class Program
         Console.ReadLine();
     }
 
-    private static void Menu()
-    {
-        while (true)
-        {
-            string[] options = { "Events", "Contacts", "See Calendar" };
-            var result = Tools.Menu("Calendar", options);
-            switch (result)
-            {
-                case 1:
-                    IEvent.Menu();
-                    continue;
-                case 2:
-                    IContact.Menu();
-                    continue;
-                case 3:
-                    ICalendar.Monthly_View();
-                    continue;
-                case 0:
-                    break;
-            }
-
-            break;
-        }
-    }
 
     private static void Save()
     {
