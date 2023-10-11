@@ -1,0 +1,58 @@
+Index: Program.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Calendar.Controllers;\r\nusing Calendar.Entities;\r\nusing Calendar.Seal;\r\n\r\nnamespace Calendar;\r\n\r\ninternal static class Program\r\n{\r\n    public static List<Event>? Events;\r\n    public static List<Contact>? Contacts;\r\n    public static DateTime Date;\r\n\r\n    private static void Main()\r\n    {\r\n        Events = new List<Event>();\r\n        Contacts = new List<Contact>();\r\n        // Load();\r\n        Date = Tools.ChooseDate();\r\n        Menu();\r\n        // Save();\r\n    }\r\n\r\n    private static void Menu()\r\n    {\r\n        while (true)\r\n        {\r\n            string[] options = { \"Events\", \"Contacts\", \"See Calendar\" };\r\n            var result = Tools.Menu(\"Calendar\", options);\r\n            switch (result)\r\n            {\r\n                case 1:\r\n                    IEvent.Menu();\r\n                    continue;\r\n                case 2:\r\n                    IContact.Menu();\r\n                    continue;\r\n                case 3:\r\n                    ICalendar.Monthly_View();\r\n                    continue;\r\n                case 0:\r\n                    break;\r\n            }\r\n            break;\r\n        }\r\n    }\r\n\r\n    private static void Save()\r\n    {\r\n        File.WriteAllText(@\"Data\\\\Events.txt\", \"\");\r\n        if (Events == null) return;\r\n        foreach (var item in Events)\r\n            Tools.FileWrite(item.ToString(), @\"Data\\\\Events.txt\");\r\n        File.WriteAllText(@\"Data\\\\Contacts.txt\", \"\");\r\n        if (Contacts == null) return;\r\n        foreach (var item in Contacts)\r\n            Tools.FileWrite(item.ToString(), @\"Data\\\\Contacts.txt\");\r\n    }\r\n\r\n    private static void Load()\r\n    {\r\n        var eventData = File.ReadAllLines(@\"Data\\\\Events.txt\");\r\n        foreach (var info in eventData)\r\n        {\r\n            var data = info.Split('|');\r\n            IEvent.Add(data[1]);\r\n        }\r\n\r\n        var contactData = File.ReadAllLines(@\"Data\\\\Contacts.txt\");\r\n        foreach (var info in contactData)\r\n        {\r\n            var data = info.Split('|');\r\n            IContact.Add(data[1]);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Program.cs b/Program.cs
+--- a/Program.cs	(revision 8fa187871a894dcff8dae8a6b780dc7eaff2ef34)
++++ b/Program.cs	(date 1696864124422)
+@@ -18,6 +18,12 @@
+         Date = Tools.ChooseDate();
+         Menu();
+         // Save();
++        DataBase();
++    }
++
++    private static void DataBase()
++    {
++        throw new NotImplementedException();
+     }
+ 
+     private static void Menu()
+Index: Calendar.csproj
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><Project Sdk=\"Microsoft.NET.Sdk\">\r\n\r\n    <PropertyGroup>\r\n        <OutputType>Exe</OutputType>\r\n        <TargetFramework>net7.0</TargetFramework>\r\n        <ImplicitUsings>enable</ImplicitUsings>\r\n        <Nullable>enable</Nullable>\r\n    </PropertyGroup>\r\n\r\n    <ItemGroup>\r\n      <Reference Include=\"Seal\">\r\n        <HintPath>\\obj\\Debug\\net7.0\\Seal.dll</HintPath>\r\n      </Reference>\r\n    </ItemGroup>\r\n\r\n</Project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Calendar.csproj b/Calendar.csproj
+--- a/Calendar.csproj	(revision 8fa187871a894dcff8dae8a6b780dc7eaff2ef34)
++++ b/Calendar.csproj	(date 1696686505086)
+@@ -7,10 +7,24 @@
+         <Nullable>enable</Nullable>
+     </PropertyGroup>
+ 
++    <ItemGroup>
++      <None Remove="Calendar.db" />
++    </ItemGroup>
++
++    <ItemGroup>
++      <Content Include="Calendar.db">
++        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++      </Content>
++    </ItemGroup>
++
+     <ItemGroup>
+       <Reference Include="Seal">
+         <HintPath>\obj\Debug\net7.0\Seal.dll</HintPath>
+       </Reference>
+     </ItemGroup>
++
++    <ItemGroup>
++      <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
++    </ItemGroup>
+ 
+ </Project>
