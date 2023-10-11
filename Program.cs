@@ -46,7 +46,7 @@ internal static class Program
                 {
                     while (reader.Read())
                         Tools.SayLine(
-                            $"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]",
+                            $"[{reader["Title"]}, {reader["StartDate"]}, {reader["StartTime"]}, {reader["EndDate"]}, {reader["EndTime"]}, {reader["Place"]}]",
                             ConsoleColor.Green);
                 }
 
@@ -68,7 +68,7 @@ internal static class Program
                         else
                         {
                             Tools.SayLine(
-                                $"[{reader["title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]",
+                                $"[{reader["Title"]}, {reader["StartDate"]}, {reader["StartTime"]}, {reader["EndDate"]}, {reader["EndTime"]}, {reader["Place"]}]",
                                 ConsoleColor.Green);
                             Tools.SayLine(
                                 $"   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",

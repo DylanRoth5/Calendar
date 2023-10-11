@@ -63,7 +63,7 @@ public interface ICalendar
 
         Tools.Clear();
         DailyView(DateTime.Parse(
-            $"{selectedDay}/{lookingMonth}/{lookingYear} {Program.Date.Hour}:{Program.Date.Minute}:{Program.Date.Hour}"));
+            $"{selectedDay}/{lookingMonth}/{lookingYear} 00:00:00"));
     }
 
     private static void PrintCalendar(int selectedDay, int lookingMonth, int lookingYear)
@@ -112,6 +112,8 @@ public interface ICalendar
         int wide = 100-currentDate.ToString().Length;
         for (var i = 0; i < 24; i++)
         {
+            currentDate = DateTime.Parse(
+                $"{currentDate.Day}/{currentDate.Month}/{currentDate.Year} {i}:00:00");
             if (Program.Date.Hour == i)
             {
                 Tools.Flip(ConsoleColor.Black, ConsoleColor.Red);
@@ -183,32 +185,22 @@ public interface ICalendar
                         {
                             while (reader.Read())
                             {
-                                string? date = reader["Date"].ToString();
-                                string[] dateparts = date.Split('/');
-                                string[] separator = dateparts[2].Split(' ');
-                                string[] timeparts = separator[1].Split(':');
-                                string year = dateparts[0];
-                                string month = dateparts[1];
-                                string day = separator[0];
-                                string hour = timeparts[0];
-                                string minute = timeparts[1];
-                                string second = timeparts[2];
-                                DateTime eventDate = DateTime.Parse($"{day}/{month}/{year} {hour}:{minute}:{second}");
-                                
-                                if (eventDate.Day == currentDate.Day && eventDate.Month == currentDate.Month && eventDate.Year == currentDate.Year && eventDate.Hour == i)
+                                DateTime startDate = DateTime.Parse($"{reader["StartDate"]} {reader["StartTime"]}");
+                                DateTime endDate = DateTime.Parse($"{reader["EndDate"]} {reader["EndTime"]}");
+
+                                if (startDate <=currentDate && endDate>=currentDate)
                                 {
                                     string eventInfo =
-                                        $"\u2502 [{reader["title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]";
+                                        $"\u2502 [{reader["Title"]}, {reader["StartDate"]}, {reader["StartTime"]}, {reader["EndDate"]}, {reader["EndTime"]}, {reader["Place"]}]";
                                     string contactInfo =
                                         $"\u2502   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]";
-                                    int eventPadding = wide % 2;
                                     int contactPadding = wide % 2;
+                                    int eventPadding = wide % 2;
                                     eventPadding += wide - eventInfo.Length;
                                     contactPadding += wide - contactInfo.Length;
                                     
                                     if (title.Equals(reader["Title"].ToString()))
                                     {
-                                        
                                         Tools.Say(
                                             contactInfo,ConsoleColor.DarkGreen);
                                         for (int j = 0; j < contactPadding; j++)
@@ -238,60 +230,27 @@ public interface ICalendar
                                 title = reader["Title"].ToString();
                             }
                         }
-                    //
-                    //     cmd.CommandText = "select * from Events";
-                    // using (var reader = cmd.ExecuteReader())
-                    // {
-                    //     while (reader.Read())
-                    //     {   
-                    //         string? date = reader["Date"].ToString();
-                    //         // Tools.SayLine($"\u2502 {reader["Title"]}");
-                    //         // Tools.SayLine($"\u2502      {date}");
-                    //         string[] dateparts = date.Split('/');
-                    //         string[] separator = dateparts[2].Split(' ');
-                    //         string[] timeparts = separator[1].Split(':');
-                    //         string year = dateparts[0];
-                    //         string month = dateparts[1];
-                    //         string day = separator[0];
-                    //         string hour = timeparts[0];
-                    //         string minute = timeparts[1];
-                    //         string second = timeparts[2];
-                    //         DateTime eventDate = DateTime.Parse($"{day}/{month}/{year} {hour}:{minute}:{second}");
-                    //         
-                    //         if (eventDate.Day == currentDate.Day && eventDate.Month == currentDate.Month && eventDate.Year == currentDate.Year && eventDate.Hour == i)
-                    //         {
-                    //             Tools.Say($"\u2502 Event: \"{reader["Title"]}\"");
-                    //             var titleWidth = 29 - reader["Title"].ToString().Length;
-                    //             for (int j = 0; j < titleWidth; j++)
-                    //             {
-                    //                 Tools.Say(" ");
-                    //             }
-                    //             Tools.Say("\u2502\n");
-                    //             Tools.Say($"\u2502      Date: {eventDate}");
-                    //             var dateWidth = 27 - reader["Date"].ToString().Length;
-                    //             for (int j = 0; j < dateWidth; j++)
-                    //             {
-                    //                 Tools.Say(" ");
-                    //             }
-                    //             Tools.Say("\u2502\n");
-                    //             Tools.Say($"\u2502      Hours: {reader["Hours"]}");
-                    //             var hoursWidth = 26 - reader["Hours"].ToString().Length;
-                    //             for (int j = 0; j < hoursWidth; j++)
-                    //             {
-                    //                 Tools.Say(" ");
-                    //             }
-                    //             Tools.Say("\u2502\n");
-                    //             Tools.Say($"\u2502      Place: {reader["Place"]}");
-                    //             var placeWidth = 26 - reader["Place"].ToString().Length;
-                    //             for (int j = 0; j < placeWidth; j++)
-                    //             {
-                    //                 Tools.Say(" ");
-                    //             }
-                    //             Tools.Say("\u2502\n");
-                    //         }
-                    //     }
-                    // }
-                    
+                        // Necesito encontrar los eventos que no tienen registrados ninguna persona
+                    cmd.CommandText =
+                        "select * from Events E where E.EventId NOT IN (SELECT R.EventId FROM Registered R) ";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            
+                            DateTime startDate = DateTime.Parse($"{reader["StartDate"]} {reader["StartTime"]}");
+                            DateTime endDate = DateTime.Parse($"{reader["EndDate"]} {reader["EndTime"]}");
+                            string eventInfo =
+                                $"\u2502 [{reader["Title"]}, {reader["StartDate"]}, {reader["StartTime"]}, {reader["EndDate"]}, {reader["EndTime"]}, {reader["Place"]}]";
+                            int eventPadding = wide % 2;
+                            eventPadding += wide - eventInfo.Length;
+
+                            if (startDate > currentDate || endDate < currentDate) continue;
+                            Tools.Say(eventInfo, ConsoleColor.Green);
+                            for (int j = 0; j < eventPadding; j++) Tools.Say(" ");
+                            Tools.Say("\u2502\n");
+                        }
+                    }
                 }
                 conn.Close();
             }
