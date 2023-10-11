@@ -6,6 +6,7 @@ public class Event
     public DateTime FechaHora;
     public int cantidadHoras;
     public string Place;
+
     public Event(string titulo, DateTime fechaHora, int cantidadHoras, string lugar)
     {
         Title = titulo;

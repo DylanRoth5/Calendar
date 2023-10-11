@@ -4,38 +4,39 @@ namespace Calendar.Seal;
 
 public class Sketch
 {
-    public static readonly string[] SealSketch = {
-"    ████████",
-"  ██░░░░░░░░██",
-"██░░    ░░  ░░██",
-"██  ████░░██  ██",
-"██  ████░░██  ██",
-"██▒▒░░░░▓▓▓▓░░██",
-"██▒▒▒▒░░░░░░▒▒▒▒██",
-"██▒▒▒▒░░▒▒▒▒▒▒▒▒░░██    ████",
-"  ██░░░░▒▒░░▒▒▒▒░░▒▒██████▒▒████",
-"    ██▒▒░░▒▒░░▒▒░░▒▒░░▒▒▒▒▒▒██▒▒██",
-"    ████░░██▒▒▒▒▒▒░░██░░▒▒▒▒░░██",
-"  ██▒▒▒▒▒▒██▒▒░░░░░░██░░▒▒░░██",
-"  ██████████░░░░░░░░████████",
-"          ██░░░░░░░░██",
-"            ████████" };
+    public static readonly string[] SealSketch =
+    {
+        "    ████████",
+        "  ██░░░░░░░░██",
+        "██░░    ░░  ░░██",
+        "██  ████░░██  ██",
+        "██  ████░░██  ██",
+        "██▒▒░░░░▓▓▓▓░░██",
+        "██▒▒▒▒░░░░░░▒▒▒▒██",
+        "██▒▒▒▒░░▒▒▒▒▒▒▒▒░░██    ████",
+        "  ██░░░░▒▒░░▒▒▒▒░░▒▒██████▒▒████",
+        "    ██▒▒░░▒▒░░▒▒░░▒▒░░▒▒▒▒▒▒██▒▒██",
+        "    ████░░██▒▒▒▒▒▒░░██░░▒▒▒▒░░██",
+        "  ██▒▒▒▒▒▒██▒▒░░░░░░██░░▒▒░░██",
+        "  ██████████░░░░░░░░████████",
+        "          ██░░░░░░░░██",
+        "            ████████"
+    };
 
     public static void SketchSeal()
     {
-        foreach (var line in SealSketch)
-        {
-            SayLine(line);
-        }
+        foreach (var line in SealSketch) SayLine(line);
     }
+
     public static void SketchSeal(int x, int y)
     {
         foreach (var line in SealSketch)
         {
-            SayAt(x,y,line);
+            SayAt(x, y, line);
             y++;
         }
     }
+
     public static readonly ConsoleColor[] SealPulse =
     {
         ConsoleColor.Blue,
@@ -66,10 +67,12 @@ public class Sketch
         Rect(0, 0, menuWidth, 2, '─', '│', "┌┐├┤");
         Rect(0, 2, menuWidth, countContent + 1, '─', '│', "├┤└┘");
     }
+
     public static void BoardApprarence(int menuWidth, int countContent)
     {
         Rect(0, 0, menuWidth, countContent + 1, '─', '│', "┌┐└┘");
     }
+
     public static void MenuAppearence(int x, int y, int menuWidth, int numOfOptions, int appearance)
     {
         if (appearance == 1)
@@ -91,7 +94,7 @@ public class Sketch
             Rect(x, y + 3 + numOfOptions, menuWidth, 2, '█', '█', "████");
         }
     }
-    
+
     public static void Point(int x, int y, char symbol)
     {
         Spot(x, y);

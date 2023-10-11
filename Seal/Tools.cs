@@ -17,53 +17,77 @@ public static class Tools
         var running = true;
         var date = $"{Day}/{Month}/{Year} {hour}:{minute}";
         var selected = 1;
-        while (running) 
+        while (running)
         {
             var content = new List<string>() { date };
             var title = "Choose Year";
             Clear();
             Console.CursorVisible = false;
-        
-            var menuWidth = CalculateMenuWidth(content,10);    
-            TitledBoardApprarence(menuWidth,content.Count);
+
+            var menuWidth = CalculateMenuWidth(content, 10);
+            TitledBoardApprarence(menuWidth, content.Count);
             Spot(menuWidth / 2 - title.Length / 2, 1);
             Say(title);
             Spot(menuWidth / 2 - date.Length / 2, 3);
-            if (selected==5)
+            if (selected == 5)
             {
                 Flip();
                 Say(Day.ToString());
                 Flip();
-            }else Say(Day.ToString());
+            }
+            else
+            {
+                Say(Day.ToString());
+            }
+
             Say("/");
-            if (selected==4)
+            if (selected == 4)
             {
                 Flip();
                 Say(Month.ToString());
                 Flip();
-            }else Say(Month.ToString());
+            }
+            else
+            {
+                Say(Month.ToString());
+            }
+
             Say("/");
-            if (selected==3)
+            if (selected == 3)
             {
                 Flip();
                 Say(Year.ToString());
                 Flip();
-            }else Say(Year.ToString());
+            }
+            else
+            {
+                Say(Year.ToString());
+            }
+
             Say(" ");
-            if (selected==2)
+            if (selected == 2)
             {
                 Flip();
                 Say(hour.ToString());
                 Flip();
-            }else Say(hour.ToString());
+            }
+            else
+            {
+                Say(hour.ToString());
+            }
+
             Say(":");
-            if (selected==1)
+            if (selected == 1)
             {
                 Flip();
                 Say(minute.ToString());
                 Flip();
-            }else Say(minute.ToString());
-            
+            }
+            else
+            {
+                Say(minute.ToString());
+            }
+
             var k = Catch();
             switch (selected)
             {
@@ -80,6 +104,7 @@ public static class Tools
                             selected++;
                             break;
                     }
+
                     break;
                 case 4:
                     switch (k.Key)
@@ -94,6 +119,7 @@ public static class Tools
                             selected++;
                             break;
                     }
+
                     break;
                 case 3:
                     switch (k.Key)
@@ -108,6 +134,7 @@ public static class Tools
                             selected++;
                             break;
                     }
+
                     break;
                 case 2:
                     switch (k.Key)
@@ -122,6 +149,7 @@ public static class Tools
                             selected++;
                             break;
                     }
+
                     break;
                 case 1:
                     switch (k.Key)
@@ -136,6 +164,7 @@ public static class Tools
                             selected++;
                             break;
                     }
+
                     break;
             }
 
@@ -149,10 +178,12 @@ public static class Tools
             if (Day < 1) Day = DateTime.DaysInMonth(Year, Month);
             if (k.Key == ConsoleKey.Enter && selected == 6) running = false;
         }
+
         Clear();
-        Spot(0,0);
+        Spot(0, 0);
         return DateTime.Parse($"{Day}/{Month}/{Year} {hour}:{minute}:{second}");
     }
+
     public static DateTime SetDate()
     {
         var Year = DateTime.Now.Year;
@@ -161,39 +192,53 @@ public static class Tools
         var running = true;
         var date = $"{Day}/{Month}/{Year}";
         var selected = 1;
-        while (running) 
+        while (running)
         {
             var content = new List<string>() { date };
             var title = "Choose Year";
             Clear();
             Console.CursorVisible = false;
-        
-            var menuWidth = CalculateMenuWidth(content,10);    
-            TitledBoardApprarence(menuWidth,content.Count);
+
+            var menuWidth = CalculateMenuWidth(content, 10);
+            TitledBoardApprarence(menuWidth, content.Count);
             Spot(menuWidth / 2 - title.Length / 2, 1);
             Say(title);
             Spot(menuWidth / 2 - date.Length / 2, 3);
-            if (selected==3)
+            if (selected == 3)
             {
                 Flip();
                 Say(Day.ToString());
                 Flip();
-            }else Say(Day.ToString());
+            }
+            else
+            {
+                Say(Day.ToString());
+            }
+
             Say("/");
-            if (selected==2)
+            if (selected == 2)
             {
                 Flip();
                 Say(Month.ToString());
                 Flip();
-            }else Say(Month.ToString());
+            }
+            else
+            {
+                Say(Month.ToString());
+            }
+
             Say("/");
-            if (selected==1)
+            if (selected == 1)
             {
                 Flip();
                 Say(Year.ToString());
                 Flip();
-            }else Say(Year.ToString());
-            
+            }
+            else
+            {
+                Say(Year.ToString());
+            }
+
             var k = Catch();
             switch (selected)
             {
@@ -210,6 +255,7 @@ public static class Tools
                             selected++;
                             break;
                     }
+
                     break;
                 case 2:
                     switch (k.Key)
@@ -224,6 +270,7 @@ public static class Tools
                             selected++;
                             break;
                     }
+
                     break;
                 case 1:
                     switch (k.Key)
@@ -238,14 +285,18 @@ public static class Tools
                             selected++;
                             break;
                     }
+
                     break;
             }
+
             if (k.Key == ConsoleKey.Enter && selected == 4) running = false;
         }
+
         Clear();
-        Spot(0,0);
+        Spot(0, 0);
         return DateTime.Parse($"{Day}/{Month}/{Year} {DateTime.Now:HH:mm:ss}");
     }
+
     public static string? FileReadAll(string filepath)
     {
         if (!File.Exists(filepath)) return null;
@@ -270,12 +321,14 @@ public static class Tools
             case 0:
                 break;
         }
+
         return currentTime;
     }
+
     public static DateTime ChooseDate()
     {
         string[] options = { "Use current time", "Write down the time" };
-        string message = "DateTime Select";
+        var message = "DateTime Select";
         var selection = Select(message, options);
         DateTime currentTime = default;
         switch (selection)
@@ -287,9 +340,10 @@ public static class Tools
                 currentTime = SetDateTime();
                 break;
         }
+
         return currentTime;
     }
-    
+
 
     public static void EraseLine(int index, string filepath)
     {
@@ -480,16 +534,18 @@ public static class Tools
     {
         Console.Write("" + word);
     }
+
     public static void Say(string? word, ConsoleColor foreground)
     {
-        var temp = Console.ForegroundColor; 
+        var temp = Console.ForegroundColor;
         Console.ForegroundColor = foreground;
         Say(word);
         Console.ForegroundColor = temp;
     }
+
     public static void SayLine(string? word, ConsoleColor foreground)
     {
-        var temp = Console.ForegroundColor; 
+        var temp = Console.ForegroundColor;
         Console.ForegroundColor = foreground;
         SayLine(word);
         Console.ForegroundColor = temp;
@@ -583,8 +639,12 @@ public static class Tools
         Catch();
         Clear();
     }
-    public static void Flip() => (Console.BackgroundColor, Console.ForegroundColor) = (Console.ForegroundColor, Console.BackgroundColor);
-    
+
+    public static void Flip()
+    {
+        (Console.BackgroundColor, Console.ForegroundColor) = (Console.ForegroundColor, Console.BackgroundColor);
+    }
+
     public static void Flip(ConsoleColor background, ConsoleColor foreground)
     {
         Console.BackgroundColor = background;
@@ -594,7 +654,7 @@ public static class Tools
     public static void Board(List<string> content)
     {
         var menuWidth = CalculateMenuWidth(content, 10);
-        BoardApprarence(menuWidth,content.Count);
+        BoardApprarence(menuWidth, content.Count);
         var y = 1;
         foreach (var item in content)
         {
@@ -603,7 +663,10 @@ public static class Tools
         }
     }
 
-    public static int CalculateMenuWidth(List<string> content, int padding) => CalculateMenuWidth(content.ToArray(), padding);
+    public static int CalculateMenuWidth(List<string> content, int padding)
+    {
+        return CalculateMenuWidth(content.ToArray(), padding);
+    }
 
     public static int CalculateMenuWidth(string[] content, int padding)
     {
@@ -621,11 +684,11 @@ public static class Tools
     {
         Clear();
         Console.CursorVisible = false;
-        
+
         if (content != null)
         {
-            var menuWidth = CalculateMenuWidth(content,10);    
-            TitledBoardApprarence(menuWidth,content.Count);
+            var menuWidth = CalculateMenuWidth(content, 10);
+            TitledBoardApprarence(menuWidth, content.Count);
             var x = menuWidth / 2 - title.Length / 2;
             var y = 1;
             Spot(x, y);
@@ -635,6 +698,7 @@ public static class Tools
                 x++;
                 SpotX(x);
             }
+
             y++;
             Spot(x, y);
             foreach (var t in content)
@@ -650,6 +714,7 @@ public static class Tools
                 }
             }
         }
+
         Catch();
     }
 
@@ -677,14 +742,14 @@ public static class Tools
         while (running)
         {
             foreground = SealPulse[color];
-            MenuAppearence(0,0,menuWidth,options.Length,appearance);
-            SketchSeal(menuWidth+2,0);
-            SayAt(menuWidth / 2 - word.Length / 2, 4 + options.Length, word); 
-            SayAt(menuWidth / 2 - title.Length / 2,1,title);
+            MenuAppearence(0, 0, menuWidth, options.Length, appearance);
+            SketchSeal(menuWidth + 2, 0);
+            SayAt(menuWidth / 2 - word.Length / 2, 4 + options.Length, word);
+            SayAt(menuWidth / 2 - title.Length / 2, 1, title);
             Spot(0, 2);
             for (var i = 0; i < options.Length; i++)
             {
-                Spot(menuWidth / 2 - options[i].Length / 2, GetY()+1);
+                Spot(menuWidth / 2 - options[i].Length / 2, GetY() + 1);
                 if (result == i + 1)
                 {
                     Flip(foreground, background);
@@ -692,7 +757,9 @@ public static class Tools
                     Flip(background, foreground);
                 }
                 else
+                {
                     Say(options[i]);
+                }
             }
 
             Spot(0, 0);
@@ -709,15 +776,20 @@ public static class Tools
                 Thread.Sleep(100);
                 color++;
             }
+
             if (result < 1) result = options.Length;
             if (result > options.Length) result = 1;
             if (color >= SealPulse.Length) color = 0;
             if (appearance >= 3) appearance = 0;
         }
+
         Flip(ConsoleColor.Black, ConsoleColor.White);
         Clear();
         return result;
     }
 
-    public static int Menu(string title, List<string> options) => Menu(title, options.ToArray());
+    public static int Menu(string title, List<string> options)
+    {
+        return Menu(title, options.ToArray());
+    }
 }

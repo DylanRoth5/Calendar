@@ -8,13 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="Seal">
-        <HintPath>\obj\Debug\net7.0\Seal.dll</HintPath>
-      </Reference>
+        <Reference Include="Seal">
+            <HintPath>\obj\Debug\net7.0\Seal.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+        <PackageReference Include="System.Data.SQLite" Version="1.0.118"/>
     </ItemGroup>
 
 </Project>

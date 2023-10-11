@@ -16,61 +16,74 @@ internal static class Program
         Events = new List<Event>();
         Contacts = new List<Contact>();
         // Load();
-        // Date = Tools.ChooseDate();
-        // Menu();
+        ShowDataBase();
+        Date = Tools.ChooseDate();
+        Menu();
         // Save();
-        DataBase();
     }
 
-    private static void DataBase()
+    private static void ShowDataBase()
     {
-        using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=C:\Users\dylan\BlackBox\Calendar\Calendar.db"))
+        using (var conn = new SQLiteConnection(@"Data Source=Calendar.db"))
         {
-            using (SQLiteCommand cmd = new SQLiteCommand(conn))
+            using (var cmd = new SQLiteCommand(conn))
             {
                 conn.Open();
-                Tools.SayLine("Contacts table:",ConsoleColor.Red);
+                Tools.SayLine("Contacts table:", ConsoleColor.Red);
                 cmd.CommandText = "select * from Contacts";
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                         Tools.SayLine(
-                            $"[{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",ConsoleColor.Green);
+                            $"[{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",
+                            ConsoleColor.Green);
                 }
+
                 Tools.SayLine();
-                Tools.SayLine("Events table:",ConsoleColor.Red);
+                Tools.SayLine("Events table:", ConsoleColor.Red);
                 cmd.CommandText = "select * from Events";
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                         Tools.SayLine(
-                            $"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]",ConsoleColor.Green);
+                            $"[{reader["Title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]",
+                            ConsoleColor.Green);
                 }
+
                 Tools.SayLine();
-                Tools.SayLine("Registers table:", ConsoleColor.Red);
-                cmd.CommandText = "select * from Events E join main.Registered R2 on E.EventId = R2.EventId join main.Contacts C on C.Contactd = R2.ContactId";
-                string? title = "";
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                Tools.SayLine("Conections:", ConsoleColor.Red);
+                cmd.CommandText =
+                    "select * from Events E join main.Registered R2 on E.EventId = R2.EventId join main.Contacts C on C.Contactd = R2.ContactId";
+                var title = "";
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         if (title.Equals(reader["Title"].ToString()))
                         {
-                            Tools.SayLine($"   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",ConsoleColor.DarkGreen);
+                            Tools.SayLine(
+                                $"   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",
+                                ConsoleColor.DarkGreen);
                         }
                         else
                         {
                             Tools.SayLine(
-                                $"[{reader["title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]",ConsoleColor.Green);
-                            Tools.SayLine($"   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",ConsoleColor.DarkGreen);
+                                $"[{reader["title"]}, {reader["Date"]}, {reader["Hours"]}, {reader["Place"]}]",
+                                ConsoleColor.Green);
+                            Tools.SayLine(
+                                $"   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]",
+                                ConsoleColor.DarkGreen);
                         }
+
                         title = reader["Title"].ToString();
                     }
                 }
+
                 Tools.SayLine();
                 conn.Close();
             }
         }
+
         Console.ReadLine();
     }
 
@@ -94,6 +107,7 @@ internal static class Program
                 case 0:
                     break;
             }
+
             break;
         }
     }
@@ -126,31 +140,30 @@ internal static class Program
             IContact.Add(data[1]);
         }
     }
+
     public static void ListaEventos()
-    {        
-        List<object> lista = new List<object>();
+    {
+        List<object> lista = new();
 
-        Contact contacto1 = new Contact("Damian", "Frick", 343123456,"damian.frick@uap.edu.ar" )
-        {};
+        var contacto1 = new Contact("Damian", "Frick", 343123456, "damian.frick@uap.edu.ar")
+            { };
 
-        Event evento1 = new Event("Cumple",DateTime.Now , 4,"la 25")
-        {};
+        var evento1 = new Event("Cumple", DateTime.Now, 4, "la 25")
+            { };
 
         lista.Add(contacto1);
         lista.Add(evento1);
 
         foreach (var item in lista)
-        {
             if (item is Contact)
             {
-                Contact contacto = (Contact)item;
+                var contacto = (Contact)item;
                 Console.WriteLine($"Contacto: {contacto.Nombre} {contacto.Apellido}");
             }
             else if (item is Event)
             {
-                Event evento = (Event)item;
+                var evento = (Event)item;
                 Console.WriteLine($"Evento: {evento.Title}");
             }
-        }
-    }    
+    }
 }
