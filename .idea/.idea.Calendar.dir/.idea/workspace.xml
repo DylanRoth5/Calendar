@@ -7,9 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c9764fe-929a-4250-9284-7522e9ee7e59" name="Changes" comment="a">
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-    </list>
+    <list default="true" id="6c9764fe-929a-4250-9284-7522e9ee7e59" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,7 +127,7 @@
       <workItem from="1696959864097" duration="3867000" />
       <workItem from="1696976871145" duration="475000" />
       <workItem from="1696977890356" duration="13295000" />
-      <workItem from="1697029033805" duration="4855000" />
+      <workItem from="1697029033805" duration="5035000" />
     </task>
     <task id="LOCAL-00001" summary="Done views">
       <option name="closed" value="true" />
@@ -227,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697035088391</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Done">
+      <option name="closed" value="true" />
+      <created>1697035441620</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1697035441620</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +278,7 @@
     <MESSAGE value="Icalendar.ce Finished" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
+    <MESSAGE value="Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done" />
   </component>
 </project>

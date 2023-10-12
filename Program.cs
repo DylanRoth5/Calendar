@@ -10,18 +10,14 @@ internal static class Program
     public static List<Event>? Events;
     public static List<Contact>? Contacts;
     public static DateTime Date;
-
     private static void Main()
     {
         Events = new List<Event>();
         Contacts = new List<Contact>();
-        // Load();
-        // ShowDataBase();
         Date = Tools.ChooseDate();
         Menu();
-        // Save();
     }
-    
+
     private static void Menu()
     {
         while (true)
@@ -42,7 +38,6 @@ internal static class Program
                 case 0:
                     break;
             }
-
             break;
         }
     }
