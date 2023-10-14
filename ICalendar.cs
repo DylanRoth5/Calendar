@@ -1,6 +1,5 @@
 using System.Data.SQLite;
 using System.Globalization;
-using System.Runtime.InteropServices.JavaScript;
 using Calendar.Seal;
 
 namespace Calendar;
@@ -54,6 +53,26 @@ public interface ICalendar
     {
         var daysInMonth = DateTime.DaysInMonth(lookingYear, lookingMonth);
         Tools.SayLine($"\n       < {lookingYear} {CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(lookingMonth)} > \n");
+
+        List<DateTime> eventDates = new List<DateTime>();
+        using (var conn = new SQLiteConnection(@"Data Source=Calendar.db"))
+        {
+            using (var cmd = new SQLiteCommand(conn))
+            {
+                conn.Open();
+                cmd.CommandText = "select * from Events";
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        eventDates.Add(DateTime.Parse($"{reader["StartDate"]} 00:00:00"));
+                        eventDates.Add(DateTime.Parse($"{reader["EndDate"]} 00:00:00"));
+                    }
+                }
+            }
+            conn.Close();
+        }
+        
         for (var i = 1; i <= daysInMonth; i++)
         {
             if (i < 10) Tools.Say(" ");
@@ -73,7 +92,27 @@ public interface ICalendar
                 Tools.Flip(ConsoleColor.Black, ConsoleColor.White);
                 Tools.Flip();
             }
-            else Tools.Say($"{i}");
+            else
+            {
+                var dateflag = false;
+                foreach (var date in eventDates.Where(date => date.Day==i && date.Month==lookingMonth && date.Year==lookingYear))
+                    dateflag = true;
+
+                if (dateflag && selectedDay != i)
+                {
+                    Tools.Flip(ConsoleColor.Black, ConsoleColor.Magenta);
+                    Tools.Say($"{i}");
+                    Tools.Flip(ConsoleColor.Black, ConsoleColor.White);
+                }else if (dateflag && selectedDay == i)
+                {
+                    Tools.Flip();
+                    Tools.Flip(ConsoleColor.Magenta, ConsoleColor.Black);
+                    Tools.Say($"{i}");
+                    Tools.Flip(ConsoleColor.Black, ConsoleColor.White);
+                    Tools.Flip();
+                }
+                else Tools.Say($"{i}");
+            }
 
             if (i % 7 == 0) Tools.SayLine("\n");
             if (selectedDay == i) Tools.Flip();
@@ -139,6 +178,7 @@ public interface ICalendar
                         while (reader.Read())
                         {
                             var startDate = DateTime.Parse($"{reader["StartDate"]} {reader["StartTime"]}");
+                            startDate = DateTime.Parse($"{reader["StartDate"]} {startDate.Hour}:00:00");
                             var endDate = DateTime.Parse($"{reader["EndDate"]} {reader["EndTime"]}");
                             if (startDate <= currentDate && endDate >= currentDate)
                             {
@@ -171,6 +211,7 @@ public interface ICalendar
                         while (reader.Read())
                         {
                             var startDate = DateTime.Parse($"{reader["StartDate"]} {reader["StartTime"]}");
+                            startDate = DateTime.Parse($"{reader["StartDate"]} {startDate.Hour}:00:00");
                             var endDate = DateTime.Parse($"{reader["EndDate"]} {reader["EndTime"]}");
                             var eventInfo =
                                 $"\u2502 [{reader["Title"]}, {reader["StartDate"]}, {reader["StartTime"]}, {reader["EndDate"]}, {reader["EndTime"]}, {reader["Place"]}]";
