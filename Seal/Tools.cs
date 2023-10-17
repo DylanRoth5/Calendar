@@ -644,6 +644,14 @@ public static class Tools
     {
         (Console.BackgroundColor, Console.ForegroundColor) = (Console.ForegroundColor, Console.BackgroundColor);
     }
+    public static void Flip(string message, ConsoleColor background, ConsoleColor foreground)
+    {
+        var back = Console.BackgroundColor;
+        var fore =Console.ForegroundColor;
+        Flip(background,foreground);
+        Say(message);
+        Flip(back,fore);
+    }
 
     public static void Flip(ConsoleColor background, ConsoleColor foreground)
     {

@@ -7,7 +7,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c9764fe-929a-4250-9284-7522e9ee7e59" name="Changes" comment="" />
+    <list default="true" id="6c9764fe-929a-4250-9284-7522e9ee7e59" name="Changes" comment="a">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50_[Changes]/.dtbcache.v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50_[Changes]/.futdcache.v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50_[Changes]/.suo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50_[Changes]/21abcf68-18ae-4bd9-9e3e-40d33984d2c1.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50_[Changes]/Calendar.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50_[Changes]/calendar.metadata.v7.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50_[Changes]/calendar.projects.v7.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/shelf/Uncommitted_changes_before_Update_at_9_10_2023_19_50__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ICalendar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ICalendar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Seal/Tools.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Seal/Tools.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/ref/Calendar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/ref/Calendar.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/refint/Calendar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/refint/Calendar.dll" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,8 +53,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/ICalendar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/dylan/BlackBox/Calendar/ICalendar.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dylan/BlackBox/Calendar/ICalendar.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/dylan/BlackBox/Calendar/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/dylan/BlackBox/Calendar/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/dylan/BlackBox/Calendar/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Seal/Tools.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -92,11 +114,11 @@
 }</component>
   <component name="RunManager">
     <configuration name="Calendar" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin/Debug/net7.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_EXTERNAL_CONSOLE" value="1" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/Calendar.csproj" />
@@ -104,7 +126,7 @@
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value="" />
+      <option name="PROJECT_TFM" value="net7.0" />
       <method v="2">
         <option name="Build" />
       </method>
@@ -128,6 +150,10 @@
       <workItem from="1696976871145" duration="475000" />
       <workItem from="1696977890356" duration="13295000" />
       <workItem from="1697029033805" duration="5035000" />
+      <workItem from="1697103114637" duration="1403000" />
+      <workItem from="1697309576918" duration="2352000" />
+      <workItem from="1697500108826" duration="1266000" />
+      <workItem from="1697501982443" duration="1371000" />
     </task>
     <task id="LOCAL-00001" summary="Done views">
       <option name="closed" value="true" />
@@ -233,7 +259,23 @@
       <option name="project" value="LOCAL" />
       <updated>1697035441620</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="update">
+      <option name="closed" value="true" />
+      <created>1697104673589</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1697104673589</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Better Calendar">
+      <option name="closed" value="true" />
+      <created>1697312014375</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1697312014375</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,6 +321,8 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="a" />
     <MESSAGE value="Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done" />
+    <MESSAGE value="update" />
+    <MESSAGE value="Better Calendar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Better Calendar" />
   </component>
 </project>
