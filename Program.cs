@@ -7,13 +7,9 @@ namespace Calendar;
 
 internal static class Program
 {
-    public static List<Event>? Events;
-    public static List<Contact>? Contacts;
     public static DateTime Date;
     private static void Main()
     {
-        Events = new List<Event>();
-        Contacts = new List<Contact>();
         Date = Tools.ChooseDate();
         Menu();
     }
