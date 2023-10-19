@@ -37,30 +37,4 @@ internal static class Program
             break;
         }
     }
-
-    public static void ListaEventos()
-    {
-        List<object> lista = new();
-
-        var contacto1 = new Contact("Damian", "Frick", 343123456, "damian.frick@uap.edu.ar")
-            { };
-
-        var evento1 = new Event("Cumple", DateTime.Now, 4, "la 25")
-            { };
-
-        lista.Add(contacto1);
-        lista.Add(evento1);
-
-        foreach (var item in lista)
-            if (item is Contact)
-            {
-                var contacto = (Contact)item;
-                Console.WriteLine($"Contacto: {contacto.Nombre} {contacto.Apellido}");
-            }
-            else if (item is Event)
-            {
-                var evento = (Event)item;
-                Console.WriteLine($"Evento: {evento.Title}");
-            }
-    }
 }
