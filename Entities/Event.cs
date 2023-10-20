@@ -3,16 +3,16 @@ namespace Calendar.Entities;
 public class Event
 {
     public string Title;
-    public DateTime FechaHora;
-    public int cantidadHoras;
+    public DateTime Start;
+    public DateTime End;
     public string Place;
 
-    public Event(string titulo, DateTime fechaHora, int cantidadHoras, string lugar)
+    public Event(string Title, DateTime Start, DateTime End, string Place)
     {
-        Title = titulo;
-        FechaHora = fechaHora;
-        this.cantidadHoras = cantidadHoras;
-        Place = lugar;
+        this.Title = Title;
+        this.Start = Start;
+        this.End = End;
+        this.Place = Place;
     }
 
     public override string ToString()
