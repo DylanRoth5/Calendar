@@ -11,16 +11,24 @@ public interface IEvent
     {
             Event evt = new Event();
 
-            Console.Write("Ingrese el titulo del nuevo evento: ");
-            evt.Title = Console.ReadLine(); //Cambiar a validation
+            Console.Write("Ingrese el titulo del evento: ");
+            evt.Title = Console.ReadLine(); //Validar datos
             Console.WriteLine();
 
-            Console.Write("Ingrese la fecha de inicio del nuevo evento: ");
-            evt.StartTime = Console.ReadLine(); //Cambiar a validation
+            Console.Write("Ingrese la fecha de inicio del evento dd/mm/yy 00:00:00 : ");
+            evt.FechaHora = DateTime.Parse(Console.ReadLine()); //Validar datos
             Console.WriteLine();
 
-            Console.Write("Ingrese la fecha final del nuevo evento: ");
-            evt.EndTime = Console.ReadLine(); //Cambiar a validation
+            Console.Write("Ingrese la hora de inicio del evento: ");
+            evt.StartTime = Console.ReadLine(); //Validar datos
+            Console.WriteLine();
+
+            Console.Write("Ingrese la hora final del evento: ");
+            evt.EndTime = Console.ReadLine(); //Validar datos
+            Console.WriteLine();
+
+            Console.Write("Ingrese el lugar del evento: ");
+            evt.Place = Console.ReadLine(); //Validar datos
             Console.WriteLine();
 
             events.Add(evt);
@@ -38,12 +46,20 @@ public interface IEvent
             evt.Title = Console.ReadLine(); //Validar datos
             Console.WriteLine();
 
-            Console.Write("Ingrese la fecha de inicio del nuevo evento: ");
+            Console.Write("Ingrese la fecha de inicio del nuevo evento dd/mm/yy 00:00:00 : ");
+            evt.FechaHora = DateTime.Parse(Console.ReadLine()); //Validar datos
+            Console.WriteLine();
+
+            Console.Write("Ingrese la hora de inicio del nuevo evento: ");
             evt.StartTime = Console.ReadLine(); //Validar datos
             Console.WriteLine();
 
-            Console.Write("Ingrese la fecha final del nuevo evento: ");
+            Console.Write("Ingrese la hora final del nuevo evento: ");
             evt.EndTime = Console.ReadLine(); //Validar datos
+            Console.WriteLine();
+
+            Console.Write("Ingrese el lugar del nuevo evento: ");
+            evt.Place = Console.ReadLine(); //Validar datos
             Console.WriteLine();
 
             Console.WriteLine();

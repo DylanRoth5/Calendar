@@ -34,7 +34,7 @@ namespace Calendar.Controllers
         {
             Event evt = new Event();
             SQLiteCommand cmd = new SQLiteCommand("select EventId, Title, StartDate, Place, StartTime, EndTime, from Events where EventId = @EventId");
-            cmd.Parameters.Add(new SQLiteParameter("@id", evt.Id));
+            cmd.Parameters.Add(new SQLiteParameter("@EventId", evt.Id));
             cmd.Connection = Conexion.Connection;
             SQLiteDataReader obdr = cmd.ExecuteReader();
             while (obdr.Read())
@@ -59,6 +59,8 @@ namespace Calendar.Controllers
             cmd.Parameters.Add(new SQLiteParameter("@Title", evt.Title));
             cmd.Parameters.Add(new SQLiteParameter("@StartDate", evt.FechaHora));
             cmd.Parameters.Add(new SQLiteParameter("@Place", evt.Place));
+            cmd.Parameters.Add(new SQLiteParameter("@StartTime", evt.StartTime));
+            cmd.Parameters.Add(new SQLiteParameter("@EndTime", evt.EndTime));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }
@@ -74,12 +76,13 @@ namespace Calendar.Controllers
         }
         public static void Update(Event evt)
         {
-            SQLiteCommand cmd = new SQLiteCommand("UPDATE Events SET Name = @Name, LastName = @LastName, Phone = @Phone, Email = @Email WHERE EventId = @EventID");
+            SQLiteCommand cmd = new SQLiteCommand("UPDATE Events SET Title = @Title, StartDate = @StartDate, Place = @Place, StartTime = @StartTime, EndTime = @EndTime  WHERE EventId = @EventID");
             cmd.Parameters.Add(new SQLiteParameter("@EventId", evt.Id));
-            // cmd.Parameters.Add(new SQLiteParameter("@Name", contact.Nombre));
-            // cmd.Parameters.Add(new SQLiteParameter("@LastName", contact.Apellido));
-            // cmd.Parameters.Add(new SQLiteParameter("@Phone", contact.Telefono));
-            // cmd.Parameters.Add(new SQLiteParameter("@Email", contact.Email));
+            cmd.Parameters.Add(new SQLiteParameter("@Title", evt.Title));
+            cmd.Parameters.Add(new SQLiteParameter("@StartDate", evt.FechaHora));
+            cmd.Parameters.Add(new SQLiteParameter("@Place", evt.Place));
+            cmd.Parameters.Add(new SQLiteParameter("@StartTime", evt.StartTime));
+            cmd.Parameters.Add(new SQLiteParameter("@EndTime", evt.EndTime));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }

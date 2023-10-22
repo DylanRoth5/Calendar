@@ -28,8 +28,8 @@ namespace Calendar.Controllers
         public static Contact getById(int id)
         {
             Contact contact = new Contact();
-            SQLiteCommand cmd = new SQLiteCommand("select Contactd, Name, LastName, Phone, Email from Contacts where Contactd = @Contactd");
-            cmd.Parameters.Add(new SQLiteParameter("@Contactd", contact.Id));
+            SQLiteCommand cmd = new SQLiteCommand("select ContactId, Name, LastName, Phone, Email from Contacts where ContactId = @ContactId");
+            cmd.Parameters.Add(new SQLiteParameter("@ContactId", contact.Id));
             cmd.Connection = Conexion.Connection;
             SQLiteDataReader obdr = cmd.ExecuteReader();
             while (obdr.Read())
@@ -58,14 +58,14 @@ namespace Calendar.Controllers
         {
             Console.WriteLine("Se va a eliminar al contacto con id: " + contact.Id);
             Console.ReadKey(true);
-            SQLiteCommand cmd = new SQLiteCommand("delete from Contacts where Contactd = @Contactd");
-            cmd.Parameters.Add(new SQLiteParameter("@Contactd", contact.Id));
+            SQLiteCommand cmd = new SQLiteCommand("delete from Contacts where ContactId = @ContactId");
+            cmd.Parameters.Add(new SQLiteParameter("@ContactId", contact.Id));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }
         public static void Update(Contact contact)
         {
-            SQLiteCommand cmd = new SQLiteCommand("UPDATE Contacts SET Name = @Name, LastName = @LastName, Phone = @Phone, Email = @Email WHERE Contactd = @Contactd");
+            SQLiteCommand cmd = new SQLiteCommand("UPDATE Contacts SET Name = @Name, LastName = @LastName, Phone = @Phone, Email = @Email WHERE ContactId = @ContactId");
             cmd.Parameters.Add(new SQLiteParameter("@Contactd", contact.Id));
             cmd.Parameters.Add(new SQLiteParameter("@Name", contact.Nombre));
             cmd.Parameters.Add(new SQLiteParameter("@LastName", contact.Apellido));
