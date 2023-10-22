@@ -72,14 +72,14 @@ namespace Calendar.Controllers
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }
-        public static void Update(Contact contact)
+        public static void Update(Event evt)
         {
-            SQLiteCommand cmd = new SQLiteCommand("UPDATE Contacts SET Name = @Name, LastName = @LastName, Phone = @Phone, Email = @Email WHERE Contactd = @Contactd");
-            cmd.Parameters.Add(new SQLiteParameter("@Contactd", contact.Id));
-            cmd.Parameters.Add(new SQLiteParameter("@Name", contact.Nombre));
-            cmd.Parameters.Add(new SQLiteParameter("@LastName", contact.Apellido));
-            cmd.Parameters.Add(new SQLiteParameter("@Phone", contact.Telefono));
-            cmd.Parameters.Add(new SQLiteParameter("@Email", contact.Email));
+            SQLiteCommand cmd = new SQLiteCommand("UPDATE Events SET Name = @Name, LastName = @LastName, Phone = @Phone, Email = @Email WHERE EventId = @EventID");
+            cmd.Parameters.Add(new SQLiteParameter("@EventId", evt.Id));
+            // cmd.Parameters.Add(new SQLiteParameter("@Name", contact.Nombre));
+            // cmd.Parameters.Add(new SQLiteParameter("@LastName", contact.Apellido));
+            // cmd.Parameters.Add(new SQLiteParameter("@Phone", contact.Telefono));
+            // cmd.Parameters.Add(new SQLiteParameter("@Email", contact.Email));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }

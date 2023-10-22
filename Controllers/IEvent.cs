@@ -6,7 +6,7 @@ namespace Calendar.Controllers;
 
 public interface IEvent
 {
-    public static List<Event> evt = pEvent.getAll();
+    public static List<Event> events = pEvent.getAll();
     public static void Create()
     {
             Event evt = new Event();
@@ -47,7 +47,7 @@ public interface IEvent
             Console.WriteLine();
 
             Console.WriteLine();
-            pContact.Update(evt);
+            pEvent.Update(evt);
         }
     static void Menu()
     {
