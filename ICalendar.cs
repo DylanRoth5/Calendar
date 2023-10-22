@@ -57,7 +57,7 @@ public interface ICalendar
         var eventDates = new List<DateTime>();
         using (var conn = new SQLiteConnection(@"Data Source=Calendar.db"))
         {
-            using (var cmd = new SQLiteCommand(conn))//a
+            using (var cmd = new SQLiteCommand(conn))
             {
                 conn.Open();
                 cmd.CommandText = "select * from Events";
