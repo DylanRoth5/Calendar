@@ -6,7 +6,7 @@ namespace Calendar.Controllers;
 
 public interface IEvent
 {
-    public static List<Event> evt = pEvent.getAll();
+    public static List<Event> events = pEvent.getAll();
     public static void Create()
     {
             Event evt = new Event();
@@ -34,19 +34,20 @@ public interface IEvent
         public static void Update(Event evt)
         {
             Console.WriteLine();
-            Console.Write("Ingrese el nuevo nombre del contacto: ");
-            contact.Nombre = Console.ReadLine(); //Validar datos
+            Console.Write("Ingrese el nuevo titulo del evento: ");
+            evt.Title = Console.ReadLine(); //Validar datos
             Console.WriteLine();
-            Console.Write("Ingrese el nuevo apellido del contacto: ");
-            contact.Apellido = Console.ReadLine(); //Validar datos
+
+            Console.Write("Ingrese la fecha de inicio del nuevo evento: ");
+            evt.StartTime = Console.ReadLine(); //Validar datos
             Console.WriteLine();
-            Console.Write("Ingrese el nuevo número del contacto: ");
-            contact.Telefono = int.Parse(Console.ReadLine()); //Validar datos
+
+            Console.Write("Ingrese la fecha final del nuevo evento: ");
+            evt.EndTime = Console.ReadLine(); //Validar datos
             Console.WriteLine();
-            Console.Write("Ingrese el nuevo email del contacto: ");
-            contact.Email = Console.ReadLine(); //Validar datos
+
             Console.WriteLine();
-            pContact.Update(contact);
+            pEvent.Update(evt);
         }
     static void Menu()
     {
