@@ -1,31 +1,37 @@
+using System.Data.SQLite;
+using Calendar.Entities;
+using Calendar.Seal;
+
 namespace Calendar.Controllers;
 
 public interface IEvent
 {
-    public static List<Event> contacts = pEvent.getAll();
+    public static List<Event> evt = pEvent.getAll();
     public static void Create()
     {
-            Contact contact = new Contact();
-            Console.Write("Ingrese el nombre del nuevo contacto: ");
-            contact.Nombre = Console.ReadLine(); //Cambiar a validation
+            Event evt = new Event();
+
+            Console.Write("Ingrese el titulo del nuevo evento: ");
+            evt.Title = Console.ReadLine(); //Cambiar a validation
             Console.WriteLine();
-            Console.Write("Ingrese el apellido del nuevo contacto: ");
-            contact.Apellido = Console.ReadLine(); //Cambiar a validation
+
+            Console.Write("Ingrese la fecha de inicio del nuevo evento: ");
+            evt.StartTime = Console.ReadLine(); //Cambiar a validation
             Console.WriteLine();
-            Console.Write("Ingrese el telefono del nuevo contacto: ");
-            contact.Telefono = int.Parse(Console.ReadLine()); //Cambiar a validation
-            Console.Write("Ingrese el email del nuevo contacto: ");
-            contact.Email = Console.ReadLine(); //Cambiar a validation
+
+            Console.Write("Ingrese la fecha final del nuevo evento: ");
+            evt.EndTime = Console.ReadLine(); //Cambiar a validation
             Console.WriteLine();
-            contacts.Add(contact);
-            pContact.Save(contact);
+
+            events.Add(evt);
+            pEvent.Save(evt);
     }
-    public static void Delete(Contact contact)
+    public static void Delete(Event evt)
     {
-        pContact.Delete(contact);
-        contacts.Remove(contact);
+        pEvent.Delete(evt);
+        events.Remove(evt);
     }
-        public static void Update(Contact contact)
+        public static void Update(Event evt)
         {
             Console.WriteLine();
             Console.Write("Ingrese el nuevo nombre del contacto: ");
