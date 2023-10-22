@@ -9,7 +9,7 @@ namespace Calendar.Controllers
         public static List<Contact> getAll()
         {
             List<Contact> contacts = new List<Contact>();
-            SQLiteCommand cmd = new SQLiteCommand("select Contactd, Name, LastName, Phone, Email from Contacts");
+            SQLiteCommand cmd = new SQLiteCommand("select ContactId, Name, LastName, Phone, Email from Contacts");
             cmd.Connection = Conexion.Connection;
             SQLiteDataReader obdr = cmd.ExecuteReader();
 
