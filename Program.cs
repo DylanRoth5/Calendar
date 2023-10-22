@@ -12,10 +12,12 @@ internal static class Program
     public static DateTime Date;
     private static void Main()
     {
+        Conexion.OpenConnection();
         Events = new List<Event>();
         Contacts = new List<Contact>();
         Date = Tools.ChooseDate();
         Menu();
+        Conexion.CloseConnection();
     }
 
     private static void Menu()
