@@ -1,5 +1,6 @@
 using System.Data.SQLite;
 using Calendar.Entities;
+using Calendar.Seal;
 
 namespace Calendar.Controllers;
 
@@ -45,11 +46,31 @@ public interface IContact
             Console.WriteLine();
             pContact.Update(contact);
         }
-
+    public static Contact Select()
+    {
+        Console.WriteLine("Ingrese el Nomre del Contacto:");
+        string s = Console.ReadLine();
+        return contacts[0];
+    }
     
     static void Menu()
     {
-        throw new NotImplementedException();
+        int op = Tools.ReadInt(Console.ReadLine());
+        Console.WriteLine("Seleccione una opcion");
+        switch (op)
+        {
+            case 1: Console.WriteLine("1. Crear Contacto");
+                Create();
+                break;
+
+            case 2: Console.WriteLine("2.Actualizar Contacto");
+                Update(Select());
+                break;
+            
+            case 3: Console.WriteLine("3.Borrar Contacto");
+                Delete(Select());
+                break;
+        }
     }
 
     static void Add(string? s)
