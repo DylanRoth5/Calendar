@@ -59,17 +59,16 @@ namespace Calendar.Controllers
             cmd.Parameters.Add(new SQLiteParameter("@Title", evt.Title));
             cmd.Parameters.Add(new SQLiteParameter("@StartDate", evt.FechaHora));
             cmd.Parameters.Add(new SQLiteParameter("@Place", evt.Place));
-            cmd.Parameters.Add(new SQLiteParameter("@StartTime", evt.Email));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }
 
-        public static void Delete(Contact contact)
+        public static void Delete(Event evt)
         {
-            Console.WriteLine("Se va a eliminar al contacto con id: " + contact.Id);
+            Console.WriteLine("Se va a eliminar al Evento con id: " + evt.Id);
             Console.ReadKey(true);
-            SQLiteCommand cmd = new SQLiteCommand("delete from Contacts where Contactd = @Contactd");
-            cmd.Parameters.Add(new SQLiteParameter("@Contactd", contact.Id));
+            SQLiteCommand cmd = new SQLiteCommand("delete from Events where EventId = @EventId");
+            cmd.Parameters.Add(new SQLiteParameter("@EventId", evt.Id));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }
