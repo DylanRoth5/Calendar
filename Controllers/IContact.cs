@@ -53,13 +53,13 @@ public interface IContact
             Console.Write("Ingrese el nuevo email del contacto: ");
             contact.Email = Console.ReadLine(); //Validar datos
             Console.WriteLine();
-            
+
             pContact.Update(contact);
         }
     public static Contact Select()
     {
-        Console.WriteLine("Ingrese el Nomre del Contacto:");
-        string s = Console.ReadLine();
+        Console.WriteLine("Ingrese el ID del Contacto:");
+        int s = int.Parse(Console.ReadLine());
         return contacts[0];
     }
     
