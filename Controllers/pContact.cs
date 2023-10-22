@@ -28,8 +28,8 @@ namespace Calendar.Controllers
         public static Contact getById(int id)
         {
             Contact contact = new Contact();
-            SQLiteCommand cmd = new SQLiteCommand("select Contactd, Name, LastName, Phone, Email from Contacts where id = @id");
-            cmd.Parameters.Add(new SQLiteParameter("@id", contact.Id));
+            SQLiteCommand cmd = new SQLiteCommand("select Contactd, Name, LastName, Phone, Email from Contacts where Contactd = @Contactd");
+            cmd.Parameters.Add(new SQLiteParameter("@Contactd", contact.Id));
             cmd.Connection = Conexion.Connection;
             SQLiteDataReader obdr = cmd.ExecuteReader();
             while (obdr.Read())
