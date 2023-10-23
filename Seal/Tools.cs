@@ -416,7 +416,13 @@ public static class Tools
 
         return result;
     }
-
+    public static void ClearLine()
+    {
+        int currentLineCursor = Console.CursorTop;
+        Console.SetCursorPosition(0, currentLineCursor);
+        Console.Write(new string(' ', Console.WindowWidth));
+        Console.SetCursorPosition(0, currentLineCursor);
+    }
     public static int ValidateInt(HashSet<int> numbers, string? order = null)
     {
         if (order is not null) { Console.WriteLine(order); }
