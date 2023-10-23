@@ -17,11 +17,11 @@ public interface IEvent
             Console.WriteLine();
 
             Console.Write("Ingrese la fecha de inicio del evento dd/mm/yy 00:00:00 : ");
-            evt.Start = DateTime.Parse(Console.ReadLine()); //Validar datos
+            evt.StartDate = DateTime.Parse(Console.ReadLine()); //Validar datos
             Console.WriteLine();
 
             Console.Write("Ingrese la hora final del evento: ");
-            evt.End = DateTime.Parse(Console.ReadLine()); //Validar datos
+            evt.EndDate = DateTime.Parse(Console.ReadLine()); //Validar datos
             Console.WriteLine();
 
             Console.Write("Ingrese el lugar del evento: ");
@@ -44,11 +44,11 @@ public interface IEvent
         Console.WriteLine();
 
         Console.Write("Ingrese la hora de inicio del nuevo evento: ");
-        evt.Start = DateTime.Parse(Console.ReadLine()); //Validar datos
+        evt.StartDate = DateTime.Parse(Console.ReadLine()); //Validar datos
         Console.WriteLine();
 
         Console.Write("Ingrese la hora final del nuevo evento: ");
-        evt.End = DateTime.Parse(Console.ReadLine()); //Validar datos
+        evt.EndDate = DateTime.Parse(Console.ReadLine()); //Validar datos
         Console.WriteLine();
 
         Console.Write("Ingrese el lugar del nuevo evento: ");
@@ -65,23 +65,27 @@ public interface IEvent
     }
     static void Menu()
     {
-        int op = Tools.ReadInt(Console.ReadLine());
-        Console.WriteLine("Seleccione una opcion");
+        var options = new List<string>() { "create", "Update", "Delete", "list"};
+        int op = Tools.Menu("Event Menu",options);
         switch (op)
         {
            case 1: Create();
                 break;
-
             case 2: Update(Select());
                 break;
-            
             case 3: Delete(Select());
                 break;
-        }    
+            case 4: List();
+                Tools.Catch();
+                break;
+        }
     }
 
-    static void Add(string? s)
+    static void List()
     {
-        throw new NotImplementedException();
+        foreach (var evnt in events)
+        {
+            Tools.SayLine($"{evnt}");
+        }
     }
 }
