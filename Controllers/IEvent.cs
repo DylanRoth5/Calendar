@@ -83,9 +83,6 @@ public interface IEvent
 
     static void List()
     {
-        foreach (var evnt in events)
-        {
-            Tools.SayLine($"{evnt}");
-        }
+        foreach (var evnt in events) Tools.SayLine($"{evnt}");
     }
 }

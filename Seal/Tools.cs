@@ -466,6 +466,14 @@ public static class Tools
         }
         return ValidateInt(numbers);
     }
+    
+    public static void ClearLine()
+    {
+        int currentLineCursor = Console.CursorTop;
+        Console.SetCursorPosition(0, currentLineCursor);
+        Console.Write(new string(' ', Console.WindowWidth));
+        Console.SetCursorPosition(0, currentLineCursor);
+    }
 
     public static char ValidateLetter()
     {
@@ -801,7 +809,6 @@ public static class Tools
         {
             foreground = SealPulse[color];
             MenuAppearence(0, 0, menuWidth, options.Length, appearance);
-            SketchSeal(menuWidth + 2, 0);
             SayAt(menuWidth / 2 - word.Length / 2, 4 + options.Length, word);
             SayAt(menuWidth / 2 - title.Length / 2, 1, title);
             Spot(0, 2);
