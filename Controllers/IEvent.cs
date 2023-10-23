@@ -1,4 +1,5 @@
 using System.Data.SQLite;
+using Calendar.Conections;
 using Calendar.Entities;
 using Calendar.Seal;
 
@@ -16,15 +17,11 @@ public interface IEvent
             Console.WriteLine();
 
             Console.Write("Ingrese la fecha de inicio del evento dd/mm/yy 00:00:00 : ");
-            evt.FechaHora = DateTime.Parse(Console.ReadLine()); //Validar datos
-            Console.WriteLine();
-
-            Console.Write("Ingrese la hora de inicio del evento: ");
-            evt.StartTime = Console.ReadLine(); //Validar datos
+            evt.Start = DateTime.Parse(Console.ReadLine()); //Validar datos
             Console.WriteLine();
 
             Console.Write("Ingrese la hora final del evento: ");
-            evt.EndTime = Console.ReadLine(); //Validar datos
+            evt.End = DateTime.Parse(Console.ReadLine()); //Validar datos
             Console.WriteLine();
 
             Console.Write("Ingrese el lugar del evento: ");
@@ -39,37 +36,33 @@ public interface IEvent
         pEvent.Delete(evt);
         events.Remove(evt);
     }
-        public static void Update(Event evt)
-        {
-            Console.WriteLine();
-            Console.Write("Ingrese el nuevo titulo del evento: ");
-            evt.Title = Console.ReadLine(); //Validar datos
-            Console.WriteLine();
+    public static void Update(Event evt)
+    {
+        Console.WriteLine();
+        Console.Write("Ingrese el nuevo titulo del evento: ");
+        evt.Title = Console.ReadLine(); //Validar datos
+        Console.WriteLine();
 
-            Console.Write("Ingrese la fecha de inicio del nuevo evento dd/mm/yy 00:00:00 : ");
-            evt.FechaHora = DateTime.Parse(Console.ReadLine()); //Validar datos
-            Console.WriteLine();
+        Console.Write("Ingrese la hora de inicio del nuevo evento: ");
+        evt.Start = DateTime.Parse(Console.ReadLine()); //Validar datos
+        Console.WriteLine();
 
-            Console.Write("Ingrese la hora de inicio del nuevo evento: ");
-            evt.StartTime = Console.ReadLine(); //Validar datos
-            Console.WriteLine();
+        Console.Write("Ingrese la hora final del nuevo evento: ");
+        evt.End = DateTime.Parse(Console.ReadLine()); //Validar datos
+        Console.WriteLine();
 
-            Console.Write("Ingrese la hora final del nuevo evento: ");
-            evt.EndTime = Console.ReadLine(); //Validar datos
-            Console.WriteLine();
+        Console.Write("Ingrese el lugar del nuevo evento: ");
+        evt.Place = Console.ReadLine(); //Validar datos
+        Console.WriteLine();
 
-            Console.Write("Ingrese el lugar del nuevo evento: ");
-            evt.Place = Console.ReadLine(); //Validar datos
-            Console.WriteLine();
+        Console.WriteLine();
+        pEvent.Update(evt);
+    }
 
-            Console.WriteLine();
-            pEvent.Update(evt);
-        }
-
-        public static Event Select()
-        {
-            return events[0];
-        }
+    public static Event Select()
+    {
+        return events[0];
+    }
     static void Menu()
     {
         int op = Tools.ReadInt(Console.ReadLine());

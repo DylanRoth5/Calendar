@@ -1,8 +1,7 @@
-using System.Data;
 using System.Data.SQLite;
 using Calendar.Entities;
 
-namespace Calendar.Controllers
+namespace Calendar.Conections
 {
     internal class pContact
     {
@@ -24,24 +23,6 @@ namespace Calendar.Controllers
                 contacts.Add(contact);
             }
             return contacts;
-        }
-        public static Contact getById(int id)
-        {
-            Contact contact = new Contact();
-            SQLiteCommand cmd = new SQLiteCommand("select ContactId, Name, LastName, Phone, Email from Contacts where ContactId = @ContactId");
-            cmd.Parameters.Add(new SQLiteParameter("@ContactId", contact.Id));
-            cmd.Connection = Conexion.Connection;
-            SQLiteDataReader obdr = cmd.ExecuteReader();
-            while (obdr.Read())
-            {
-                contact.Id = obdr.GetInt32(0);
-                contact.Nombre = obdr.GetString(1);
-                contact.Apellido = obdr.GetString(2);
-                contact.Telefono = obdr.GetInt32(3);
-                contact.Email = obdr.GetString(4);
-                
-            }
-            return contact;
         }
         public static void Save(Contact contact)
         {
@@ -76,3 +57,21 @@ namespace Calendar.Controllers
         }
     }
 }
+        // public static Contact getById(int id)
+        // {
+        //     Contact contact = new Contact();
+        //     SQLiteCommand cmd = new SQLiteCommand("select ContactId, Name, LastName, Phone, Email from Contacts where ContactId = @ContactId");
+        //     cmd.Parameters.Add(new SQLiteParameter("@ContactId", contact.Id));
+        //     cmd.Connection = Conexion.Connection;
+        //     SQLiteDataReader obdr = cmd.ExecuteReader();
+        //     while (obdr.Read())
+        //     {
+        //         contact.Id = obdr.GetInt32(0);
+        //         contact.Nombre = obdr.GetString(1);
+        //         contact.Apellido = obdr.GetString(2);
+        //         contact.Telefono = obdr.GetInt32(3);
+        //         contact.Email = obdr.GetString(4);
+        //         
+        //     }
+        //     return contact;
+        // }

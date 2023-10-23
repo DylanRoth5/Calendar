@@ -143,13 +143,13 @@ public interface ICalendar
                 using (var reader = cmd.ExecuteReader())
                     while (reader.Read())
                     {
-                        var startDate = DateTime.Parse($"{reader["StartDate"]} {reader["StartTime"]}");
+                        var startDate = DateTime.Parse($"{reader["StartDate"]} {reader["Start"]}");
                         startDate = DateTime.Parse($"{reader["StartDate"]} {startDate.Hour}:00:00");
-                        var endDate = DateTime.Parse($"{reader["EndDate"]} {reader["EndTime"]}");
+                        var endDate = DateTime.Parse($"{reader["EndDate"]} {reader["End"]}");
                         if (startDate <= currentDate && endDate >= currentDate)
                         {
                             var eventInfo =
-                                $"\u2502 [{reader["Title"]}, {reader["StartDate"]}, {reader["StartTime"]}, {reader["EndDate"]}, {reader["EndTime"]}, {reader["Place"]}]";
+                                $"\u2502 [{reader["Title"]}, {reader["StartDate"]}, {reader["Start"]}, {reader["EndDate"]}, {reader["End"]}, {reader["Place"]}]";
                             var contactInfo =
                                 $"\u2502   \u2192 [{reader["Name"]}, {reader["LastName"]}, {reader["Phone"]}, {reader["Email"]}]";
                             var contactPadding = (wide % 2) + (wide - contactInfo.Length);
@@ -176,10 +176,10 @@ public interface ICalendar
                 using (var reader = cmd.ExecuteReader())
                     while (reader.Read())
                     {
-                        var startDate = DateTime.Parse($"{reader["StartDate"]} {reader["StartTime"]}");
+                        var startDate = DateTime.Parse($"{reader["StartDate"]} {reader["Start"]}");
                         startDate = DateTime.Parse($"{reader["StartDate"]} {startDate.Hour}:00:00");
-                        var endDate = DateTime.Parse($"{reader["EndDate"]} {reader["EndTime"]}");
-                        var eventInfo = $"\u2502 [{reader["Title"]}, {reader["StartDate"]}, {reader["StartTime"]}, {reader["EndDate"]}, {reader["EndTime"]}, {reader["Place"]}]";
+                        var endDate = DateTime.Parse($"{reader["EndDate"]} {reader["End"]}");
+                        var eventInfo = $"\u2502 [{reader["Title"]}, {reader["StartDate"]}, {reader["Start"]}, {reader["EndDate"]}, {reader["End"]}, {reader["Place"]}]";
                         var eventPadding = (wide % 2) + (wide - eventInfo.Length);
                         if (startDate > currentDate || endDate < currentDate) continue;
                         Tools.Say(eventInfo, ConsoleColor.Green);

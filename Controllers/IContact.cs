@@ -1,4 +1,5 @@
 using System.Data.SQLite;
+using Calendar.Conections;
 using Calendar.Entities;
 using Calendar.Seal;
 
@@ -27,9 +28,10 @@ public interface IContact
             contact.Email = Console.ReadLine(); //Cambiar a validation
             Console.WriteLine();
 
-            contacts.Add(contact);
             pContact.Save(contact);
+            contacts = pContact.getAll();
     }
+    
     public static void Delete(Contact contact)
     {
         pContact.Delete(contact);

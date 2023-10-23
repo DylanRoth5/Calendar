@@ -2,6 +2,7 @@
 using Calendar.Entities;
 using Calendar.Seal;
 using System.Data.SQLite;
+using Calendar.Conections;
 
 namespace Calendar;
 

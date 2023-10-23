@@ -4,28 +4,30 @@ public class Event
 {
     public int Id;
     public string Title;
-    public DateTime FechaHora;
-    public string EndTime;
-    public string StartTime;
-
-    public int cantidadHoras;
+    public DateTime End;
+    public DateTime Start;
+    public TimeSpan Duration;
     public string Place;
 
     public Event(){
 
     }
-    public Event(string titulo, DateTime fechaHora, string EndTime, string StartTime, string lugar)
+    public Event(string title, DateTime start, DateTime end, string place)
     {
-        Title = titulo;
-        FechaHora = fechaHora;
-        this.EndTime = EndTime;
-        this.StartTime = StartTime;
-        cantidadHoras = int.Parse(EndTime) - int.Parse(StartTime);
-        Place = lugar;
+        Title = title;
+        Start = start;
+        End = end;
+        Duration = end - start;
+        Place = place;
     }
 
     public override string ToString()
     {
         return base.ToString();
+    }
+
+    public void setDuration()
+    {
+        Duration = End - Start;
     }
 }

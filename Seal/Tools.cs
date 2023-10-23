@@ -417,55 +417,55 @@ public static class Tools
         return result;
     }
 
-    public static int ValidateInt(HashSet<int> numbers, string? order = null)
-    {
-        if (order is not null) { Console.WriteLine(order); }
-        string number = "";
-        // Remember the initial cursor position
-        int initialCursorTop = Console.CursorTop;
-        // Get the current line
-        int currentLine = Console.CursorTop;
-        ClearLine();
-        ConsoleKeyInfo KeyInfo;
-        do
-        {
-            KeyInfo = Console.ReadKey(intercept: true);
-            if (KeyInfo.KeyChar >= '0' && KeyInfo.KeyChar <= '9')
-            {
-                Console.Write(KeyInfo.KeyChar);
-                number += KeyInfo.KeyChar;
-            }
-
-            if (KeyInfo.Key == ConsoleKey.Backspace && number.Length > 0)
-            {
-                Console.CursorLeft--;
-                Console.Write(" ");
-                Console.CursorLeft--;
-                number = number.Substring(0, number.Length - 1);
-            }
-        }
-        while (KeyInfo.Key != ConsoleKey.Enter || number.Length == 0);
-
-        if (number.Length > 0)
-        {
-            if (numbers.Contains(int.Parse(number)))
-            {
-                Console.SetCursorPosition(0, currentLine);
-                ClearLine();
-                return int.Parse(number);
-            }
-            else
-            {
-                // Clear only the current line
-                Console.SetCursorPosition(0, currentLine);
-                Console.WriteLine("\nType a number that exists in the list of options...");
-                // Reset cursor to the initial position
-                Console.SetCursorPosition(0, initialCursorTop);
-                Console.ReadKey(true);
-            }
-        }
-        return ValidateInt(numbers);
-    }
+    // public static int ValidateInt(HashSet<int> numbers, string? order = null)
+    // {
+    //     if (order is not null) { Console.WriteLine(order); }
+    //     string number = "";
+    //     // Remember the initial cursor position
+    //     int initialCursorTop = Console.CursorTop;
+    //     // Get the current line
+    //     int currentLine = Console.CursorTop;
+    //     ClearLine();
+    //     ConsoleKeyInfo KeyInfo;
+    //     do
+    //     {
+    //         KeyInfo = Console.ReadKey(intercept: true);
+    //         if (KeyInfo.KeyChar >= '0' && KeyInfo.KeyChar <= '9')
+    //         {
+    //             Console.Write(KeyInfo.KeyChar);
+    //             number += KeyInfo.KeyChar;
+    //         }
+    //
+    //         if (KeyInfo.Key == ConsoleKey.Backspace && number.Length > 0)
+    //         {
+    //             Console.CursorLeft--;
+    //             Console.Write(" ");
+    //             Console.CursorLeft--;
+    //             number = number.Substring(0, number.Length - 1);
+    //         }
+    //     }
+    //     while (KeyInfo.Key != ConsoleKey.Enter || number.Length == 0);
+    //
+    //     if (number.Length > 0)
+    //     {
+    //         if (numbers.Contains(int.Parse(number)))
+    //         {
+    //             Console.SetCursorPosition(0, currentLine);
+    //             ClearLine();
+    //             return int.Parse(number);
+    //         }
+    //         else
+    //         {
+    //             // Clear only the current line
+    //             Console.SetCursorPosition(0, currentLine);
+    //             Console.WriteLine("\nType a number that exists in the list of options...");
+    //             // Reset cursor to the initial position
+    //             Console.SetCursorPosition(0, initialCursorTop);
+    //             Console.ReadKey(true);
+    //         }
+    //     }
+    //     return ValidateInt(numbers);
+    // }
 
     public static char ValidateLetter()
     {
