@@ -66,19 +66,19 @@ public interface IContact
     static void Menu()
     {
         int op = Tools.ReadInt(Console.ReadLine());
-        Console.WriteLine("Seleccione una opcion");
+        Console.WriteLine("Seleccione una opcion:");
+        Console.WriteLine(" 1. Crear Contacto");
+        Console.WriteLine("2.Actualizar Contacto");
+        Console.WriteLine("3.Borrar Contacto");
         switch (op)
         {
-            case 1: Console.WriteLine("1. Crear Contacto");
-                Create();
+            case 1: Create();
                 break;
 
-            case 2: Console.WriteLine("2.Actualizar Contacto");
-                Update(Select());
+            case 2: Update(Select());
                 break;
             
-            case 3: Console.WriteLine("3.Borrar Contacto");
-                Delete(Select());
+            case 3: Delete(Select());
                 break;
         }
     }

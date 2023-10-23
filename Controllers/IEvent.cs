@@ -65,9 +65,26 @@ public interface IEvent
             Console.WriteLine();
             pEvent.Update(evt);
         }
+
+        public static Event Select()
+        {
+            return events[0];
+        }
     static void Menu()
     {
-        throw new NotImplementedException();
+        int op = Tools.ReadInt(Console.ReadLine());
+        Console.WriteLine("Seleccione una opcion");
+        switch (op)
+        {
+           case 1: Create();
+                break;
+
+            case 2: Update(Select());
+                break;
+            
+            case 3: Delete(Select());
+                break;
+        }    
     }
 
     static void Add(string? s)
