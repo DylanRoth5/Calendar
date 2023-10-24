@@ -32,7 +32,7 @@ internal static class Program
                     IContact.Menu();
                     continue;
                 case 3:
-                    ICalendar.Monthly_View();
+                    ICalendar.MonthlyView();
                     continue;
                 case 0:
                     break;

@@ -3,24 +3,24 @@ namespace Calendar.Entities;
 public class Contact
 {
     public int Id { get; set; }
-    public string Nombre { get; set; }
-    public string Apellido { get; set; }
-    public int Telefono { get; set; }
+    public string Name { get; set; }
+    public string LastName { get; set; }
+    public int Phone { get; set; }
     public string Email { get; set; }
 
     public Contact(){
 
     }
-    public Contact(string nombre, string apellido, int telefono, string email)
+    public Contact(string name, string lastName, int phone, string email)
     {
-        Nombre = nombre;
-        Apellido = apellido;
-        Telefono = telefono;
+        Name = name;
+        LastName = lastName;
+        Phone = phone;
         Email = email;
     }
 
     public override string ToString()
     {
-        return base.ToString();
+        return $"[{Id}] [{Name}] [{LastName}] [{Phone}] [{Email}]";
     }
 }

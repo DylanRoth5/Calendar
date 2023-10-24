@@ -8,9 +8,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c9764fe-929a-4250-9284-7522e9ee7e59" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Conections/pRelation.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Controllers/IRelation.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Entities/Relation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Calendar.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Conections/pContact.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Conections/pContact.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Conections/pEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Conections/pEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/IContact.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/IContact.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/IEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/IEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entities/Contact.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Contact.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entities/Event.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/Event.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ICalendar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ICalendar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Seal/Tools.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Seal/Tools.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.db" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net7.0/Calendar.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/Calendar.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/ref/Calendar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/ref/Calendar.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net7.0/refint/Calendar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net7.0/refint/Calendar.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +121,7 @@
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin/Debug/net7.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/Calendar.csproj" />
@@ -306,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698074623887</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added back the clearline">
+      <option name="closed" value="true" />
+      <created>1698093830996</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1698093830996</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,6 +382,7 @@
     <MESSAGE value="a" />
     <MESSAGE value="changed event properties" />
     <MESSAGE value="Fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes" />
+    <MESSAGE value="added back the clearline" />
+    <option name="LAST_COMMIT_MESSAGE" value="added back the clearline" />
   </component>
 </project>

@@ -4,30 +4,30 @@ public class Event
 {
     public int Id;
     public string Title;
-    public DateTime EndDate;
-    public DateTime StartDate;
+    public DateTime End;
+    public DateTime Start;
     public TimeSpan Duration;
     public string Place;
 
     public Event(){
 
     }
-    public Event(string title, DateTime StartDate, DateTime EndDate, string place)
+    public Event(string title, DateTime start, DateTime end, string place)
     {
         Title = title;
-        StartDate = StartDate;
-        EndDate = EndDate;
-        Duration = EndDate - StartDate;
+        Start = start;
+        End = end;
+        Duration = End - Start;
         Place = place;
     }
 
     public override string ToString()
     {
-        return $"[{Id}] [{Title}] [{StartDate}] [{EndDate}] [{Duration}] [{Place}]";
+        return $"[{Id}] [{Title}] [{Start}] [{End}] [{Duration}] [{Place}]";
     }
 
     public void setDuration()
     {
-        Duration = EndDate - StartDate;
+        Duration = End - Start;
     }
 }

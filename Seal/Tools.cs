@@ -512,6 +512,10 @@ public static class Tools
     {
         Console.SetCursorPosition(x, y);
     }
+    public static int Select(string title, List<string> options)
+    {
+        return Select(title, options.ToArray());
+    }
 
     public static void Print(string @filepath, List<string>? options)
     {

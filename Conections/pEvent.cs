@@ -9,78 +9,61 @@ namespace Calendar.Conections
     {
         public static List<Event> getAll()
         {
-            List<Event> events = new List<Event>();
-            SQLiteCommand cmd = new SQLiteCommand($"select EventId, Title, Start, End, Place from Events");
+            var events = new List<Event>();
+            var cmd = new SQLiteCommand("select EventId, Title, Start, End, Place from Events");
             cmd.Connection = Conexion.Connection;
-            SQLiteDataReader obdr = cmd.ExecuteReader();
-
-            DateTime defaultDate = DateTime.Parse($"01/01/2000 00:00:00");
-            while (obdr.Read())
+            var reader = cmd.ExecuteReader();
+            
+            var defaultDate = DateTime.Parse($"01/01/2000 00:00:00");
+            while (reader.Read())
             {
-                Event evt = new Event();
-                evt.Id = obdr.GetInt32(0);
-                evt.Title = obdr.GetString(1);
-                evt.StartDate = defaultDate.AddSeconds(obdr.GetInt32(2));
-                evt.EndDate = defaultDate.AddSeconds(obdr.GetInt32(3));
-                evt.Place = obdr.GetString(4);
-                evt.setDuration();
-                events.Add(evt);
+                var event_ = new Event();
+                event_.Id = reader.GetInt32(0);
+                event_.Title = reader.GetString(1);
+                event_.Start = DateTime.Parse(reader.GetString(2));
+                event_.End = DateTime.Parse(reader.GetString(3));
+                event_.Place = reader.GetString(4);
+                event_.setDuration();
+                events.Add(event_);
             }
+
             return events;
         }
-        public static void Save(Event evt)
+
+        public static void Save(Event evnt)
         {
-            SQLiteCommand cmd = new SQLiteCommand("insert into Events( Title, Start, End, Place ) values( @Title, @Start, @End, @Place )");
-            cmd.Parameters.Add(new SQLiteParameter("@Title", evt.Title));
-            cmd.Parameters.Add(new SQLiteParameter("@Start", SqlDateTime.Parse(evt.StartDate.ToString(CultureInfo.CurrentCulture))));
-            cmd.Parameters.Add(new SQLiteParameter("@End", SqlDateTime.Parse(evt.EndDate.ToString(CultureInfo.CurrentCulture))));
-            cmd.Parameters.Add(new SQLiteParameter("@Place", evt.Place));
+            var cmd = new SQLiteCommand(
+                "insert into Events(Title, Start, End, Place) values(@Title, @Start, @End, @Place)");
+            cmd.Parameters.Add(new SQLiteParameter("@Title", evnt.Title));
+            cmd.Parameters.Add(new SQLiteParameter("@Start", $"{evnt.Start.Day}/{evnt.Start.Month}/{evnt.Start.Year} {evnt.Start.Hour}:{evnt.Start.Minute}:{evnt.Start.Second}"));
+            cmd.Parameters.Add(new SQLiteParameter("@End", $"{evnt.End.Day}/{evnt.End.Month}/{evnt.End.Year} {evnt.End.Hour}:{evnt.End.Minute}:{evnt.End.Second}"));
+            cmd.Parameters.Add(new SQLiteParameter("@Place", evnt.Place));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }
 
-        public static void Delete(Event evt)
+        public static void Delete(Event event_)
         {
-            Console.WriteLine("Se va a eliminar al Evento con id: " + evt.Id);
+            Console.WriteLine("Se va a eliminar al contacto con id: " + event_.Id);
             Console.ReadKey(true);
-            SQLiteCommand cmd = new SQLiteCommand("delete from Events where EventId = @EventId");
-            cmd.Parameters.Add(new SQLiteParameter("@EventId", evt.Id));
+            var cmd = new SQLiteCommand("delete from Events where EventId = @Id");
+            cmd.Parameters.Add(new SQLiteParameter("@Id", event_.Id));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }
-        public static void Update(Event evt)
+
+        public static void Update(Event evnt)
         {
-            SQLiteCommand cmd = new SQLiteCommand("UPDATE Events SET Title = @Title, Start = @Start, End = @End, Place = @Place  WHERE EventId = @EventID");
-            cmd.Parameters.Add(new SQLiteParameter("@EventId", evt.Id));
-            cmd.Parameters.Add(new SQLiteParameter("@Title", evt.Title));
-            cmd.Parameters.Add(new SQLiteParameter("@Start", SqlDateTime.Parse(evt.StartDate.ToString(CultureInfo.CurrentCulture))));
-            cmd.Parameters.Add(new SQLiteParameter("@End", SqlDateTime.Parse(evt.EndDate.ToString(CultureInfo.CurrentCulture))));
-            cmd.Parameters.Add(new SQLiteParameter("@Place", evt.Place));
+            var cmd = new SQLiteCommand(
+                "UPDATE Events SET Title = @Title, Start = @Start, End = @End, Place = @Place WHERE EventId = @EventId");
+            cmd.Parameters.Add(new SQLiteParameter("@EventId", evnt.Id));
+            cmd.Parameters.Add(new SQLiteParameter("@Title", evnt.Title));
+            cmd.Parameters.Add(new SQLiteParameter("@Start", $"{evnt.Start.Day}/{evnt.Start.Month}/{evnt.Start.Year} {evnt.Start.Hour}:{evnt.Start.Minute}:{evnt.Start.Second}"));
+            cmd.Parameters.Add(new SQLiteParameter("@End", $"{evnt.End.Day}/{evnt.End.Month}/{evnt.End.Year} {evnt.End.Hour}:{evnt.End.Minute}:{evnt.End.Second}"));
+            cmd.Parameters.Add(new SQLiteParameter("@Place", evnt.Place));
             cmd.Connection = Conexion.Connection;
+            
             cmd.ExecuteNonQuery();
         }
     }
 }
-        // public static Event getById(int id)
-        // {
-        //     Event evt = new Event();
-        //     SQLiteCommand cmd = new SQLiteCommand("select EventId, Title, StartDate, Place, Start, End, from Events where EventId = @EventId");
-        //     cmd.Parameters.Add(new SQLiteParameter("@EventId", evt.Id));
-        //     cmd.Connection = Conexion.Connection;
-        //     SQLiteDataReader obdr = cmd.ExecuteReader();
-        //     while (obdr.Read())
-        //     {
-        //         evt.Id = obdr.GetInt32(0);
-        //         evt.Title = obdr.GetString(1);
-        //         evt.FechaHora = DateTime.Parse(obdr.GetString(2));
-        //         evt.Place = obdr.GetString(3);
-        //         string startTime = obdr.GetString(4);
-        //         string endTime = obdr.GetString(5);
-        //         evt.Start = startTime;
-        //         evt.End = endTime;
-        //         TimeSpan timeDifference = DateTime.Parse(endTime) - DateTime.Parse(startTime);
-        //         evt.cantidadHoras = (int)timeDifference.TotalHours;
-        //         
-        //     }
-        //     return evt;
-        // }

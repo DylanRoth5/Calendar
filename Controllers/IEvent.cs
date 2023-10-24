@@ -17,11 +17,11 @@ public interface IEvent
             Console.WriteLine();
 
             Console.Write("Ingrese la fecha de inicio del evento dd/mm/yy 00:00:00 : ");
-            evt.StartDate = DateTime.Parse(Console.ReadLine()); //Validar datos
+            evt.Start = DateTime.Parse(Console.ReadLine()); //Validar datos
             Console.WriteLine();
 
             Console.Write("Ingrese la hora final del evento: ");
-            evt.EndDate = DateTime.Parse(Console.ReadLine()); //Validar datos
+            evt.End = DateTime.Parse(Console.ReadLine()); //Validar datos
             Console.WriteLine();
 
             Console.Write("Ingrese el lugar del evento: ");
@@ -44,11 +44,11 @@ public interface IEvent
         Console.WriteLine();
 
         Console.Write("Ingrese la hora de inicio del nuevo evento: ");
-        evt.StartDate = DateTime.Parse(Console.ReadLine()); //Validar datos
+        evt.Start = DateTime.Parse(Console.ReadLine()); //Validar datos
         Console.WriteLine();
 
         Console.Write("Ingrese la hora final del nuevo evento: ");
-        evt.EndDate = DateTime.Parse(Console.ReadLine()); //Validar datos
+        evt.End = DateTime.Parse(Console.ReadLine()); //Validar datos
         Console.WriteLine();
 
         Console.Write("Ingrese el lugar del nuevo evento: ");
@@ -59,9 +59,16 @@ public interface IEvent
         pEvent.Update(evt);
     }
 
+    public static Event Select(int id)
+    {
+        return pEvent.getAll().FirstOrDefault(event_ => event_.Id == id) ?? throw new InvalidOperationException();
+    }
+
     public static Event Select()
     {
-        return events[0];
+        List();
+        var id = Tools.ReadInt("Enter the Id: ");
+        return pEvent.getAll().FirstOrDefault(event_ => event_.Id == id) ?? throw new InvalidOperationException();
     }
     static void Menu()
     {
@@ -83,6 +90,16 @@ public interface IEvent
 
     static void List()
     {
-        foreach (var evnt in events) Tools.SayLine($"{evnt}");
+        foreach (var event_ in events)
+        {
+            Tools.SayLine($"{event_}",ConsoleColor.DarkYellow);
+            foreach (var contact in from relation in pRelation.getAll()
+                     where relation.EventId == event_.Id
+                     from contact in IContact.contacts
+                     
+                     where contact.Id == relation.ContactId
+                     select contact)
+                Tools.SayLine($" -> {contact}",ConsoleColor.Green);
+        }
     }
 }
