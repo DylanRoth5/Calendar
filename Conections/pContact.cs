@@ -39,14 +39,14 @@ namespace Calendar.Conections
         {
             Console.WriteLine("Se va a eliminar al contacto con id: " + contact.Id);
             Console.ReadKey(true);
-            SQLiteCommand cmd = new SQLiteCommand("delete from Contacts where ContactId = @ContactId");
+            SQLiteCommand cmd = new SQLiteCommand("delete from Contacts where Contactd = @Contactd");
             cmd.Parameters.Add(new SQLiteParameter("@ContactId", contact.Id));
             cmd.Connection = Conexion.Connection;
             cmd.ExecuteNonQuery();
         }
         public static void Update(Contact contact)
         {
-            SQLiteCommand cmd = new SQLiteCommand("UPDATE Contacts SET Name = @Name, LastName = @LastName, Phone = @Phone, Email = @Email WHERE ContactId = @ContactId");
+            SQLiteCommand cmd = new SQLiteCommand("UPDATE Contacts SET Name = @Name, LastName = @LastName, Phone = @Phone, Email = @Email WHERE Contactd = @Contactd");
             cmd.Parameters.Add(new SQLiteParameter("@Contactd", contact.Id));
             cmd.Parameters.Add(new SQLiteParameter("@Name", contact.Name));
             cmd.Parameters.Add(new SQLiteParameter("@LastName", contact.LastName));
