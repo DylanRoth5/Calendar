@@ -14,11 +14,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Data.SQLite" Version="1.0.118"/>
+        <None Remove="Calendar.db"/>
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Calendar.db"/>
+      <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
     </ItemGroup>
 
 </Project>

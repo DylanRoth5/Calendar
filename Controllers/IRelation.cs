@@ -6,6 +6,7 @@ namespace Calendar.Controllers;
 
 public interface IRelation
 {
+    
     public static void Create()
     {
         var relation = new Relation();

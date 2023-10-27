@@ -88,7 +88,7 @@ public interface IEvent
     }
     static void Menu()
     {
-        var options = new List<string>() { "create", "Update", "Delete", "list"};
+        var options = new List<string>() { "create", "Update", "Delete", "list", "add to event", "remove from event"};
         int op = Tools.Menu("Event Menu",options);
         switch (op)
         {
@@ -101,9 +101,14 @@ public interface IEvent
             case 4: List();
                 Tools.Catch();
                 break;
+           case 5:
+               IRelation.Create();
+               break;
+           case 6: 
+               IRelation.Delete(IRelation.Select());
+               break;
         }
     }
-
     static void List()
     {
         foreach (var event_ in events)
@@ -112,7 +117,6 @@ public interface IEvent
             foreach (var contact in from relation in pRelation.getAll()
                      where relation.EventId == event_.Id
                      from contact in IContact.contacts
-                     
                      where contact.Id == relation.ContactId
                      select contact)
                 Tools.SayLine($" -> {contact}",ConsoleColor.Green);
