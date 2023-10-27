@@ -10,26 +10,42 @@ public interface IEvent
     public static List<Event> events = pEvent.getAll();
     public static void Create()
     {
-            Event evt = new Event();
+        Event evt = new Event();
 
-            Console.Write("Ingrese el titulo del evento: ");
-            evt.Title = Console.ReadLine(); //Validar datos
-            Console.WriteLine();
+        Console.Write("Ingrese el titulo del evento: ");
+        evt.Title = Console.ReadLine(); //Validar datos
+        Console.WriteLine();
 
-            Console.Write("Ingrese la fecha de inicio del evento dd/mm/yy 00:00:00 : ");
-            evt.Start = DateTime.Parse(Console.ReadLine()); //Validar datos
-            Console.WriteLine();
+        Console.Write("Ingrese la fecha de inicio del evento dd/mm/yy 00:00:00 : ");
+        evt.Start = DateTime.Parse(Console.ReadLine()); //Validar datos
+        Console.WriteLine();
 
-            Console.Write("Ingrese la hora final del evento: ");
-            evt.End = DateTime.Parse(Console.ReadLine()); //Validar datos
-            Console.WriteLine();
+        Console.Write("Ingrese la hora final del evento: ");
+        evt.End = DateTime.Parse(Console.ReadLine()); //Validar datos
+        Console.WriteLine();
 
-            Console.Write("Ingrese el lugar del evento: ");
-            evt.Place = Console.ReadLine(); //Validar datos
-            Console.WriteLine();
+        Console.Write("Ingrese el lugar del evento: ");
+        evt.Place = Console.ReadLine(); //Validar datos
+        Console.WriteLine();
 
-            events.Add(evt);
-            pEvent.Save(evt);
+        //Console.Write("Hay Cntactos en este evento? (1.si 2.no)");
+        //int bandera = int.Parse(Console.ReadLine());
+        //if (bandera == 1)
+        //{
+        //    IContact.Create();
+        //}
+        //else if (bandera == 2)
+        //{
+        //    //salir del if
+        //}
+
+        //else
+        //    Console.WriteLine("Opcion Invalida, seleccione 1.si o 2.no");
+        //    bandera = int.Parse(Console.ReadLine());
+
+
+        events.Add(evt);
+        pEvent.Save(evt);
     }
     public static void Delete(Event evt)
     {
